@@ -43,7 +43,7 @@ get_agent_files() {
     # =========================================================================
     local agent_order=(
         "planner"
-        "feature-developer"
+        "feature-developer-v3"
         "test-runner"
         "tycho"
         "powertest-runner"
@@ -161,7 +161,7 @@ needs_serena_activation() {
     # =========================================================================
     local serena_agents=(
         "planner"
-        "feature-developer"
+        "feature-developer-v3"
         "test-runner"
         "tycho"
         "powertest-runner"
@@ -231,11 +231,21 @@ launch_agent() {
     # Change to project directory
     cd "$PROJECT_ROOT"
 
+    # Build initial prompt
+    # If TASK_PROMPT_FILE is set (by dispatch-kit), use that as the initial prompt.
+    # Otherwise, fall back to Serena activation prompt for code-focused agents.
+    local initial_prompt=""
+    if [[ -n "$TASK_PROMPT_FILE" && -f "$TASK_PROMPT_FILE" ]]; then
+        initial_prompt=$(cat "$TASK_PROMPT_FILE")
+        echo -e "${GREEN}Task prompt loaded from dispatch-kit${NC}"
+    elif needs_serena_activation "$name"; then
+        initial_prompt="Please activate Serena for semantic code navigation in this project before we begin. Use: mcp__serena__activate_project(\"$PROJECT_NAME\")"
+    fi
+
     # Launch Claude with model and full agent markdown as system prompt
-    # For code-focused agents, send initial Serena activation prompt
-    if needs_serena_activation "$name"; then
+    if [[ -n "$initial_prompt" ]]; then
         exec claude --model "$model" --append-system-prompt "$full_agent_content" \
-            "Please activate Serena for semantic code navigation in this project before we begin. Use: mcp__serena__activate_project(\"$PROJECT_NAME\")"
+            "$initial_prompt"
     else
         exec claude --model "$model" --append-system-prompt "$full_agent_content"
     fi
