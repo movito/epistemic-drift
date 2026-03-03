@@ -2,7 +2,6 @@ export interface ClusterData {
   color: string;
   fill: string;
   label: string;
-  labelPos?: { x: number; y: number };
 }
 
 export interface NodeData {

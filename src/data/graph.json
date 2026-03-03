@@ -13,32 +13,27 @@
     "cognition": {
       "color": "#2d6a4f",
       "fill": "rgba(45,106,79,0.08)",
-      "label": "4E Cognitive Architecture",
-      "labelPos": { "x": 230, "y": 55 }
+      "label": "4E Cognitive Architecture"
     },
     "failure": {
       "color": "#9b2226",
       "fill": "rgba(155,34,38,0.07)",
-      "label": "Failure Modes",
-      "labelPos": { "x": 790, "y": 75 }
+      "label": "Failure Modes"
     },
     "domain": {
       "color": "#7b5ea7",
       "fill": "rgba(123,94,167,0.07)",
-      "label": "Domain Properties (Cynefin)",
-      "labelPos": { "x": 770, "y": 480 }
+      "label": "Domain Properties (Cynefin)"
     },
     "foundation": {
       "color": "#b5651d",
       "fill": "rgba(181,101,29,0.08)",
-      "label": "What Must Reside in the Person",
-      "labelPos": { "x": 220, "y": 510 }
+      "label": "What Must Reside in the Person"
     },
     "intensification": {
       "color": "#555555",
       "fill": "rgba(100,100,100,0.06)",
-      "label": "Work Intensification",
-      "labelPos": { "x": 900, "y": 380 }
+      "label": "Work Intensification"
     }
   },
   "nodes": [

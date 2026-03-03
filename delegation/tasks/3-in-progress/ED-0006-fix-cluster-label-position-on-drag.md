@@ -1,6 +1,6 @@
 # ED-0006: Fix cluster label position on node drag
 
-**Status**: Todo
+**Status**: In Progress
 **Priority**: medium
 **Assigned To**: feature-developer-v3
 **Estimated Effort**: 1-2 hours
