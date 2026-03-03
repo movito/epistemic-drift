@@ -1,38 +1,69 @@
 {
   "planner": {
     "status": "completed",
-    "current_task": "ED-0006",
+    "current_task": "ED-0001 through ED-0006",
     "task_started": "2026-03-03",
-    "brief_note": "COMPLETE: ED-0006 task spec and handoff ready for feature-developer",
-    "details_link": "delegation/tasks/2-todo/ED-0006-fix-cluster-label-position-on-drag.md",
-    "handoff_file": ".agent-context/ED-0006-HANDOFF-feature-developer.md"
+    "brief_note": "COMPLETE: All backlog tasks assigned to feature-developer-v3 instances in worktrees",
+    "details_link": "delegation/tasks/2-todo/"
   },
-  "feature-developer": {
+  "feature-developer-v3:ED-0001": {
+    "status": "assigned",
+    "current_task": "ED-0001",
+    "task_started": "2026-03-03",
+    "brief_note": "Download IBM Plex Sans fonts",
+    "details_link": "delegation/tasks/2-todo/ED-0001-download-ibm-plex-fonts.md",
+    "worktree": ".claude/worktrees/ED-0001",
+    "branch": "feature/ED-0001-download-fonts"
+  },
+  "feature-developer-v3:ED-0002": {
+    "status": "assigned",
+    "current_task": "ED-0002",
+    "task_started": "2026-03-03",
+    "brief_note": "Fix node drag with pan/zoom transform",
+    "details_link": "delegation/tasks/2-todo/ED-0002-fix-node-drag-with-transform.md",
+    "worktree": ".claude/worktrees/ED-0002",
+    "branch": "feature/ED-0002-fix-node-drag"
+  },
+  "feature-developer-v3:ED-0003": {
+    "status": "assigned",
+    "current_task": "ED-0003",
+    "task_started": "2026-03-03",
+    "brief_note": "Visual polish and animations",
+    "details_link": "delegation/tasks/2-todo/ED-0003-visual-polish-and-animations.md",
+    "worktree": ".claude/worktrees/ED-0003",
+    "branch": "feature/ED-0003-visual-polish"
+  },
+  "feature-developer-v3:ED-0004": {
+    "status": "assigned",
+    "current_task": "ED-0004",
+    "task_started": "2026-03-03",
+    "brief_note": "Responsive layout",
+    "details_link": "delegation/tasks/2-todo/ED-0004-responsive-layout.md",
+    "worktree": ".claude/worktrees/ED-0004",
+    "branch": "feature/ED-0004-responsive-layout"
+  },
+  "feature-developer-v3:ED-0005": {
+    "status": "assigned",
+    "current_task": "ED-0005",
+    "task_started": "2026-03-03",
+    "brief_note": "Favicon and Open Graph meta",
+    "details_link": "delegation/tasks/2-todo/ED-0005-favicon-and-meta.md",
+    "worktree": ".claude/worktrees/ED-0005",
+    "branch": "feature/ED-0005-favicon-meta"
+  },
+  "feature-developer-v3:ED-0006": {
     "status": "assigned",
     "current_task": "ED-0006",
     "task_started": "2026-03-03",
-    "brief_note": "Assigned: Fix cluster label position on node drag",
-    "details_link": "delegation/tasks/2-todo/ED-0006-fix-cluster-label-position-on-drag.md"
+    "brief_note": "Fix cluster label position on node drag",
+    "details_link": "delegation/tasks/2-todo/ED-0006-fix-cluster-label-position-on-drag.md",
+    "branch": "feature/ED-0006-fix-cluster-label-drag"
   },
   "code-reviewer": {
     "status": "idle",
     "current_task": null,
     "task_started": null,
     "brief_note": "Ready for review tasks",
-    "details_link": null
-  },
-  "test-runner": {
-    "status": "idle",
-    "current_task": null,
-    "task_started": null,
-    "brief_note": "Ready for testing tasks",
-    "details_link": null
-  },
-  "document-reviewer": {
-    "status": "idle",
-    "current_task": null,
-    "task_started": null,
-    "brief_note": "Ready for documentation review",
     "details_link": null
   }
 }
