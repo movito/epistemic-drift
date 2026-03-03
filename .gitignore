@@ -1,0 +1,161 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# DaVinci Resolve specific
+*.drp
+*.drt
+resolve_backups/
+
+# Project specific
+*.log
+temp/
+output/
+exported_edls/
+rendered_videos/
+# GUI test artifacts (if frontend directory exists)
+frontend/coverage/
+frontend/playwright-report/
+frontend/test-results/
+frontend/*.aaf
+
+# Test cutlist files (user-generated test data)
+*_cutlist.json
+*.aaf
+
+# Security - never commit these
+*.key
+*.pem
+*.p12
+config/secrets.json
+.secrets/
+
+# Development
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Dual-agent workflow artifacts
+tasks/*.diff
+tasks/*.txt
+tasks/review_notes.md
+.aider.chat.history.md
+.aider.input.history
+.aider/
+adversarial-workflow/test_venv*/
+
+# Adversarial Workflow
+.adversarial/logs/
+.adversarial/artifacts/
+
+# Audio processing work files (user projects)
+audio-processing/
+
+# Parser output logs (temporary)
+logs/parser-output/
+.aider*
+
+# Teleport (kiro) directory
+.kiro/
+logs/
+
+# Task monitoring system
+.task-monitor.db
+.task-monitor.db-journal
+
+# Serena config (generated from template)
+.serena/project.yml
+
+# Adversarial Workflow
+# Evaluators are installed via: ./scripts/project install-evaluators
+.adversarial/evaluators/
+
+# Adversarial Workflow
+.dispatch/config.local.yml

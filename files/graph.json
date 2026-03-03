@@ -1,0 +1,212 @@
+{
+  "meta": {
+    "title": "Epistemic Expansion & AI",
+    "subtitle": "Starting from Cherny's insight — \"you have to understand the layer under the layer at which you work\" — this map clusters the key concepts around the human practitioner.",
+    "note": "Click or hover on nodes to explore connections. Drag nodes to reposition. Press D to dump positions to console, S to export SVG, P to export PNG."
+  },
+  "clusters": {
+    "center": {
+      "color": "#1a1a2e",
+      "fill": "rgba(255,255,255,0)",
+      "label": ""
+    },
+    "cognition": {
+      "color": "#2d6a4f",
+      "fill": "rgba(45,106,79,0.08)",
+      "label": "4E Cognitive Architecture",
+      "labelPos": { "x": 230, "y": 55 }
+    },
+    "failure": {
+      "color": "#9b2226",
+      "fill": "rgba(155,34,38,0.07)",
+      "label": "Failure Modes",
+      "labelPos": { "x": 790, "y": 75 }
+    },
+    "domain": {
+      "color": "#7b5ea7",
+      "fill": "rgba(123,94,167,0.07)",
+      "label": "Domain Properties (Cynefin)",
+      "labelPos": { "x": 770, "y": 480 }
+    },
+    "foundation": {
+      "color": "#b5651d",
+      "fill": "rgba(181,101,29,0.08)",
+      "label": "What Must Reside in the Person",
+      "labelPos": { "x": 220, "y": 510 }
+    },
+    "intensification": {
+      "color": "#555555",
+      "fill": "rgba(100,100,100,0.06)",
+      "label": "Work Intensification",
+      "labelPos": { "x": 900, "y": 380 }
+    }
+  },
+  "nodes": [
+    {
+      "id": "human",
+      "label": "The Human\nPractitioner",
+      "x": 500, "y": 400,
+      "cluster": "center",
+      "description": "The knowledge worker operating in AI-augmented environments. Central question: what must reside in the person vs. what can safely reside in the tool?",
+      "radius": 48
+    },
+    {
+      "id": "extended",
+      "label": "Extended\nCognition",
+      "x": 200, "y": 150,
+      "cluster": "cognition",
+      "description": "AI as cognitive prosthesis. Amplified by generative AI — the user's reach expands into unfamiliar domains. (Clark & Chalmers, 1998)",
+      "radius": 36
+    },
+    {
+      "id": "enacted",
+      "label": "Enacted\nCognition",
+      "x": 330, "y": 100,
+      "cluster": "cognition",
+      "description": "Knowing through doing. Practice-based understanding that builds retrieval structures integrated with the task. What AI shortcuts bypass. (4E framework)",
+      "radius": 36
+    },
+    {
+      "id": "embodied",
+      "label": "Embodied\nCognition",
+      "x": 140, "y": 280,
+      "cluster": "cognition",
+      "description": "The 'feels wrong' intuition. Expert pattern recognition that operates below conscious reasoning. Degrades with fatigue and disuse. (Dreyfus; 4E framework)",
+      "radius": 36
+    },
+    {
+      "id": "embedded",
+      "label": "Embedded\nCognition",
+      "x": 290, "y": 240,
+      "cluster": "cognition",
+      "description": "Cognition situated in social/material context. Code reviews, team expertise, institutional memory. Stressed when people act outside their epistemic niche.",
+      "radius": 36
+    },
+    {
+      "id": "hollowed",
+      "label": "Hollowed\nMind",
+      "x": 720, "y": 120,
+      "cluster": "failure",
+      "description": "Long-term dependency state where capacity for deep reasoning diminishes. The 'Sovereignty Trap' — choosing the path of least cognitive resistance. (Klein & Klein, 2025)",
+      "radius": 36
+    },
+    {
+      "id": "asleep",
+      "label": "Falling Asleep\nat the Wheel",
+      "x": 850, "y": 200,
+      "cluster": "failure",
+      "description": "High-quality AI produces worse human performance. Users disengage, stop checking, lose vigilance. Better AI → lazier humans. (Dell'Acqua, 2022)",
+      "radius": 36
+    },
+    {
+      "id": "invisible_boundary",
+      "label": "Silent Domain\nShift",
+      "x": 780, "y": 280,
+      "cluster": "failure",
+      "description": "AI produces equally fluent output whether the problem is Complicated or Complex. No alarm sounds. The user who lacks enacted knowledge can't detect the transition.",
+      "radius": 36
+    },
+    {
+      "id": "complicated",
+      "label": "Complicated\nDomain",
+      "x": 780, "y": 520,
+      "cluster": "domain",
+      "description": "Known unknowns. Expert analysis can determine the right answer. AI-extended cognition works well here — pattern-matching established practice. (Cynefin: Sense-Analyze-Respond)",
+      "radius": 36
+    },
+    {
+      "id": "complex",
+      "label": "Complex\nDomain",
+      "x": 850, "y": 630,
+      "cluster": "domain",
+      "description": "Unknown unknowns. Cause and effect only visible in retrospect. Requires probe-sense-respond. Where AI-extended-but-not-enacted cognition fails silently. (Cynefin)",
+      "radius": 36
+    },
+    {
+      "id": "jagged",
+      "label": "Jagged\nFrontier",
+      "x": 680, "y": 620,
+      "cluster": "domain",
+      "description": "AI capabilities are unevenly distributed across tasks. The boundary is irregular and task-specific, not a clean line. Users must map it through experience. (Dell'Acqua et al., 2023)",
+      "radius": 36
+    },
+    {
+      "id": "layer_under",
+      "label": "The Layer\nUnderneath",
+      "x": 200, "y": 550,
+      "cluster": "foundation",
+      "description": "\"You really have to understand the layer under the layer at which you work.\" The foundational knowledge that enables diagnosis when the working layer breaks. (Boris Cherny, Lenny's Podcast)",
+      "radius": 38
+    },
+    {
+      "id": "diagnostic",
+      "label": "Diagnostic\nCapability",
+      "x": 320, "y": 640,
+      "cluster": "foundation",
+      "description": "The ability to switch modes: from operating through AI to reasoning about what went wrong. Itself a Complex-domain activity — recursive: you need the skill to recognize you need the skill.",
+      "radius": 36
+    },
+    {
+      "id": "bainbridge",
+      "label": "Bainbridge's\nIrony",
+      "x": 150, "y": 680,
+      "cluster": "foundation",
+      "description": "Automation removes the practice needed to maintain skills required when automation fails. With AI: skills may never develop in the first place, and the need for them becomes invisible. (Bainbridge, 1983)",
+      "radius": 36
+    },
+    {
+      "id": "task_expansion",
+      "label": "Task\nExpansion",
+      "x": 900, "y": 420,
+      "cluster": "intensification",
+      "description": "Workers step into responsibilities beyond their domain. PM writes code, researcher does engineering. AI makes unfamiliar tasks feel accessible. (HBR study, 2025)",
+      "radius": 32
+    },
+    {
+      "id": "blurred_boundaries",
+      "label": "Blurred\nBoundaries",
+      "x": 920, "y": 520,
+      "cluster": "intensification",
+      "description": "Work spills into breaks, evenings, early mornings. Prompting AI feels like chatting, not working. Downtime no longer provides recovery. (HBR study, 2025)",
+      "radius": 32
+    }
+  ],
+  "edges": [
+    { "from": "extended", "to": "enacted", "label": "tension", "style": "dashed" },
+    { "from": "embodied", "to": "enacted", "label": "develops\ntogether" },
+    { "from": "embedded", "to": "enacted", "label": "scaffolds" },
+    { "from": "embodied", "to": "embedded" },
+
+    { "from": "human", "to": "extended", "label": "AI amplifies" },
+    { "from": "human", "to": "enacted", "label": "AI may\nbypass" },
+    { "from": "human", "to": "embodied", "label": "fatigue\ndegrades" },
+    { "from": "human", "to": "embedded", "label": "social context" },
+
+    { "from": "human", "to": "layer_under", "label": "must\nmaintain" },
+    { "from": "human", "to": "diagnostic", "label": "needs for\nbreakdown" },
+
+    { "from": "layer_under", "to": "diagnostic", "label": "enables" },
+    { "from": "bainbridge", "to": "diagnostic", "label": "predicts\natrophy of" },
+    { "from": "bainbridge", "to": "layer_under", "label": "warns about\nloss of" },
+
+    { "from": "extended", "to": "hollowed", "label": "without enactment\nleads to", "style": "dashed" },
+    { "from": "extended", "to": "asleep", "label": "fluency\nmasks risk" },
+    { "from": "enacted", "to": "invisible_boundary", "label": "absence\ncauses", "style": "dashed" },
+
+    { "from": "complicated", "to": "complex", "label": "silent\nshift" },
+    { "from": "jagged", "to": "complicated", "label": "AI works\nwell here" },
+    { "from": "jagged", "to": "complex", "label": "AI fails\nhere" },
+    { "from": "invisible_boundary", "to": "complicated" },
+    { "from": "invisible_boundary", "to": "complex" },
+
+    { "from": "task_expansion", "to": "invisible_boundary", "label": "creates\nexposure" },
+    { "from": "task_expansion", "to": "jagged", "label": "crosses" },
+    { "from": "blurred_boundaries", "to": "embodied", "label": "depletes", "style": "dashed" },
+
+    { "from": "hollowed", "to": "bainbridge", "label": "modern\nversion of", "style": "dotted" },
+    { "from": "asleep", "to": "bainbridge", "label": "empirical\nevidence for", "style": "dotted" },
+    { "from": "diagnostic", "to": "complex", "label": "is itself a\nComplex activity" },
+    { "from": "layer_under", "to": "enacted", "label": "built\nthrough" },
+    { "from": "human", "to": "task_expansion", "label": "drawn into" }
+  ]
+}

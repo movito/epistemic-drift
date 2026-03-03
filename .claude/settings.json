@@ -1,0 +1,51 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(gh *)",
+      "Bash(pytest *)",
+      "Bash(./scripts/*)",
+      "Bash(python* scripts/*.py*)",
+      "Bash(black *)",
+      "Bash(isort *)",
+      "Bash(flake8 *)",
+      "Bash(cat *)",
+      "Bash(cp *)",
+      "Bash(echo *)",
+      "Bash(jq *)",
+      "Bash(wc *)",
+      "Bash(ls *)",
+      "Bash(sleep *)",
+      "Bash(adversarial *)",
+      "Bash(tmux *)",
+      "Bash(which *)",
+      "Bash(brew *)",
+      "Bash(ruff *)",
+      "Bash(pre-commit *)",
+      "Read",
+      "Write",
+      "Edit",
+      "MultiEdit",
+      "Glob",
+      "Grep",
+      "Skill",
+      "WebFetch",
+      "Task",
+      "mcp__serena__*"
+    ],
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean*)",
+      "Bash(git branch -D*)",
+      "Bash(rm -rf*)",
+      "Bash(rm -r *)",
+      "Bash(gh repo delete*)",
+      "Bash(pip install*)",
+      "Bash(uv add*)",
+      "Bash(curl*|*curl*)",
+      "Bash(wget*)"
+    ]
+  }
+}

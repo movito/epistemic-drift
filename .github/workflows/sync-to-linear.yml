@@ -1,0 +1,76 @@
+name: Sync Tasks to Linear
+
+on:
+  push:
+    paths:
+      - 'delegation/tasks/1-backlog/*.md'
+      - 'delegation/tasks/2-todo/*.md'
+      - 'delegation/tasks/3-in-progress/*.md'
+      - 'delegation/tasks/4-in-review/*.md'
+      - 'delegation/tasks/5-done/*.md'
+      - 'delegation/tasks/6-canceled/*.md'
+      - 'delegation/tasks/7-blocked/*.md'
+      - 'scripts/sync_tasks_to_linear.py'
+    branches:
+      - main
+      - develop
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  sync:
+    name: Sync to Linear
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check for Linear API key
+        id: check-secret
+        run: |
+          if [ -z "${{ secrets.LINEAR_API_KEY }}" ]; then
+            echo "::notice::LINEAR_API_KEY secret not configured. Skipping sync."
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Checkout repository
+        if: steps.check-secret.outputs.skip != 'true'
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0  # Full history for context
+
+      - name: Set up Python
+        if: steps.check-secret.outputs.skip != 'true'
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        if: steps.check-secret.outputs.skip != 'true'
+        run: |
+          pip install gql[requests] requests python-dotenv
+
+      - name: Sync tasks to Linear
+        if: steps.check-secret.outputs.skip != 'true'
+        run: |
+          python scripts/sync_tasks_to_linear.py
+        env:
+          LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+          LINEAR_TEAM_ID: ${{ secrets.LINEAR_TEAM_ID }}
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: Summary
+        if: always()
+        run: |
+          if [ "${{ steps.check-secret.outputs.skip }}" == "true" ]; then
+            echo "## Linear Sync Skipped" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "LINEAR_API_KEY secret not configured. To enable sync:" >> $GITHUB_STEP_SUMMARY
+            echo "1. Go to repository Settings > Secrets and variables > Actions" >> $GITHUB_STEP_SUMMARY
+            echo "2. Add LINEAR_API_KEY and LINEAR_TEAM_ID secrets" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## Linear Sync Results" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Tasks from numbered workflow folders (1-backlog through 7-blocked) have been synced to Linear." >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "View your Linear board at: https://linear.app" >> $GITHUB_STEP_SUMMARY
+          fi

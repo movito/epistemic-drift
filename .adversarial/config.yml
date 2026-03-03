@@ -1,0 +1,23 @@
+# Adversarial Workflow Configuration
+# This file configures the adversarial workflow for your project
+
+# Model Configuration
+evaluator_model: gpt-4o
+
+# Directory Structure
+task_directory: tasks/
+log_directory: .adversarial/logs/
+artifacts_directory: .adversarial/artifacts/
+
+# Test Configuration
+test_command: pytest
+
+# Workflow Settings
+# Enable/disable automatic script execution
+auto_run: false
+
+# Git integration (requires git repo)
+git_integration: true
+
+# Save artifacts after each phase
+save_artifacts: true
