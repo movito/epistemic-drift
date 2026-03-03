@@ -97,11 +97,12 @@ export default function Node({
   return (
     <g
       ref={groupRef}
+      className="node-group"
       style={{
-        cursor: "grab",
-        transition: "opacity var(--transition-fast)",
         opacity,
-      }}
+        "--cx": `${node.x}px`,
+        "--cy": `${node.y}px`,
+      } as React.CSSProperties}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}

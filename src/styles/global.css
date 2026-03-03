@@ -64,3 +64,38 @@ body {
 body {
   overflow: hidden;
 }
+
+/* ── Animations ─────────────────────────────────────── */
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── SVG Node interactions ──────────────────────────── */
+
+.node-group {
+  transform-origin: var(--cx) var(--cy);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.node-group:hover {
+  transform: scale(1.05);
+}
+
+.node-group:active {
+  cursor: grabbing;
+}
+
+/* ── Export buttons ──────────────────────────────────── */
+
+.export-btn:hover {
+  background: var(--color-bg) !important;
+  transform: scale(1.03);
+}
