@@ -1,6 +1,6 @@
 # Agent Context System
 
-This directory contains coordination files for the agentive development workflow.
+This directory contains coordination files for the Epistemic Drift development workflow.
 
 ## Contents
 

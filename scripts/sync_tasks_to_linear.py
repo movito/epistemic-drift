@@ -46,7 +46,7 @@ except ImportError:
     from logging_config import setup_logging
 
 # Initialize logger
-logger = setup_logging("agentive.sync")
+logger = setup_logging("epistemic_drift.sync")
 
 # Try to load .env file if it exists
 try:

@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# Bootstrap a new agentive project from existing design materials.
+# Bootstrap a new project from existing design materials.
 #
 # Usage:
-#   ~/Github/agentive-starter-kit/scripts/bootstrap.sh ~/Github/my-project
+#   ~/Github/epistemic-drift/scripts/bootstrap.sh ~/Github/my-project
 #
 # Prerequisites:
 #   - Target directory exists (with your design materials in it)
-#   - agentive-starter-kit is cloned at the path this script lives in
+#   - epistemic-drift is cloned at the path this script lives in
 #
 # What this does:
-#   1. Copies ASK scaffolding into your project (preserves your files)
+#   1. Copies project scaffolding into your project (preserves your files)
 #   2. Runs setup-dev.sh (Python, venv, dispatch-kit, deps, tmux, dispatch init)
 #   3. Launches the bootstrap agent to read your materials and configure everything
 #
@@ -23,7 +23,7 @@ set -e
 # Resolve paths
 # ─────────────────────────────────────────
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ASK_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+PROJECT_SRC="$(cd "$SCRIPT_DIR/.." && pwd)"
 TARGET="${1:?Usage: $0 <target-directory>}"
 
 # Resolve target to absolute path
@@ -38,7 +38,7 @@ PROJECT_NAME="$(basename "$TARGET")"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "🚀 Bootstrapping: $PROJECT_NAME"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  Source:  $ASK_ROOT"
+echo "  Source:  $PROJECT_SRC"
 echo "  Target:  $TARGET"
 echo
 
@@ -51,46 +51,46 @@ echo "1/4 📂 Copying scaffolding..."
 RSYNC_BASE=(rsync -a --ignore-existing --exclude='.git/' --exclude='.venv/' --exclude='__pycache__/' --exclude='.DS_Store')
 
 # .claude/ — agent definitions, commands, skills, settings
-"${RSYNC_BASE[@]}" "$ASK_ROOT/.claude/" "$TARGET/.claude/"
+"${RSYNC_BASE[@]}" "$PROJECT_SRC/.claude/" "$TARGET/.claude/"
 
 # .adversarial/ — evaluation config, docs, scripts, templates (not logs/artifacts/evaluators)
 "${RSYNC_BASE[@]}" \
     --exclude='logs/' --exclude='artifacts/' --exclude='inputs/' --exclude='evaluators/' \
-    "$ASK_ROOT/.adversarial/" "$TARGET/.adversarial/"
+    "$PROJECT_SRC/.adversarial/" "$TARGET/.adversarial/"
 
 # .agent-context/ — workflows, templates, patterns (not old handoffs/retros/reviews)
 "${RSYNC_BASE[@]}" \
-    --exclude='ASK-*' --exclude='retros/' --exclude='reviews/' --exclude='research/' \
+    --exclude='ED-*' --exclude='retros/' --exclude='reviews/' --exclude='research/' \
     --exclude='*SESSION-HANDOVER*' --exclude='*LINEAR-SYNC*' --exclude='*MIRIAD*' \
     --exclude='*code-review-lessons*' --exclude='*code-review-test*' \
-    "$ASK_ROOT/.agent-context/" "$TARGET/.agent-context/"
+    "$PROJECT_SRC/.agent-context/" "$TARGET/.agent-context/"
 
 # .serena/ — setup script and template
 "${RSYNC_BASE[@]}" --exclude='cache/' --exclude='memories/' --exclude='claude-code/' \
-    "$ASK_ROOT/.serena/" "$TARGET/.serena/"
+    "$PROJECT_SRC/.serena/" "$TARGET/.serena/"
 
 # .github/ — CI workflows, dependabot
-"${RSYNC_BASE[@]}" "$ASK_ROOT/.github/" "$TARGET/.github/"
+"${RSYNC_BASE[@]}" "$PROJECT_SRC/.github/" "$TARGET/.github/"
 
 # agents/ — launcher scripts
-"${RSYNC_BASE[@]}" "$ASK_ROOT/agents/" "$TARGET/agents/"
+"${RSYNC_BASE[@]}" "$PROJECT_SRC/agents/" "$TARGET/agents/"
 
 # delegation/ — task folder structure and templates (not old task files)
-"${RSYNC_BASE[@]}" --exclude='ASK-*' "$ASK_ROOT/delegation/" "$TARGET/delegation/"
+"${RSYNC_BASE[@]}" --exclude='ED-*' "$PROJECT_SRC/delegation/" "$TARGET/delegation/"
 
 # docs/ — only the structural parts (decisions, testing guide)
-"${RSYNC_BASE[@]}" --exclude='proposals/' "$ASK_ROOT/docs/" "$TARGET/docs/"
+"${RSYNC_BASE[@]}" --exclude='proposals/' "$PROJECT_SRC/docs/" "$TARGET/docs/"
 
 # scripts/ — project management, CI, setup
-"${RSYNC_BASE[@]}" "$ASK_ROOT/scripts/" "$TARGET/scripts/"
+"${RSYNC_BASE[@]}" "$PROJECT_SRC/scripts/" "$TARGET/scripts/"
 
 # tests/ — conftest and test infrastructure
-"${RSYNC_BASE[@]}" "$ASK_ROOT/tests/" "$TARGET/tests/"
+"${RSYNC_BASE[@]}" "$PROJECT_SRC/tests/" "$TARGET/tests/"
 
 # Top-level files (only if they don't exist in target)
 for f in CLAUDE.md pyproject.toml .gitignore .pre-commit-config.yaml .env.template .coderabbitignore conftest.py; do
-    if [ -f "$ASK_ROOT/$f" ] && [ ! -f "$TARGET/$f" ]; then
-        cp "$ASK_ROOT/$f" "$TARGET/$f"
+    if [ -f "$PROJECT_SRC/$f" ] && [ ! -f "$TARGET/$f" ]; then
+        cp "$PROJECT_SRC/$f" "$TARGET/$f"
     fi
 done
 
@@ -109,7 +109,7 @@ if [ -d ".git" ]; then
 else
     git init
     git add -A
-    git commit -m "Initial commit: design materials + agentive scaffolding"
+    git commit -m "Initial commit: design materials + project scaffolding"
     echo "✅ Git repo initialized with initial commit"
 fi
 echo

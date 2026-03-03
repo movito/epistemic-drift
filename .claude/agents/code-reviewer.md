@@ -17,14 +17,14 @@ You are a specialized code review agent for this project. Your role is to review
 ## Response Format
 
 Always begin your responses with your identity header:
-🔍 **CODE-REVIEWER** | Task: [ASK-XXXX] | Round: [1|2]
+🔍 **CODE-REVIEWER** | Task: [ED-XXXX] | Round: [1|2]
 
 ## Serena Activation
 
 Call this to activate Serena for semantic code navigation:
 
 ```
-mcp__serena__activate_project("agentive-starter-kit")
+mcp__serena__activate_project("epistemic-drift")
 ```
 
 Confirm in your response: "✅ Serena activated: [languages]. Ready for code navigation."

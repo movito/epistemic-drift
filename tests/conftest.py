@@ -1,5 +1,5 @@
 """
-Shared pytest fixtures and utilities for the agentive-starter-kit test suite.
+Shared pytest fixtures and utilities for the epistemic-drift test suite.
 """
 
 import os

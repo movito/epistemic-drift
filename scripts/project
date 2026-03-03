@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Project CLI - Command Launcher for Agentive Projects
+Project CLI - Command Launcher for Epistemic Drift
 =====================================================
 
 Simple memorable command interface for common project operations.
@@ -53,7 +53,7 @@ def find_task_file(task_id: str, project_dir: Path) -> Path | None:
     """Find a task file by ID across all workflow folders."""
     tasks_dir = project_dir / "delegation" / "tasks"
 
-    # Normalize task ID (handle ASK-0001 or ASK-1)
+    # Normalize task ID (handle ED-0001 or ED-1)
     task_id_upper = task_id.upper()
 
     for folder in tasks_dir.iterdir():
@@ -991,7 +991,7 @@ except Exception as e:
         # Move task to new status folder
         if len(sys.argv) < 4:
             print("Usage: ./scripts/project move <task-id> <status>")
-            print("       ./project move ASK-0001 done")
+            print("       ./project move ED-0001 done")
             print(f"       Valid statuses: {', '.join(STATUS_FOLDER_MAP.keys())}")
             sys.exit(1)
         task_id = sys.argv[2]
@@ -1101,7 +1101,7 @@ local_tasks = []
 for folder in workflow_folders:
     folder_path = tasks_dir / folder
     if folder_path.exists():
-        # Match any task format: PREFIX-NNNN-description.md (e.g., TASK-0001, ASK-0001, TC2-0001)
+        # Match any task format: PREFIX-NNNN-description.md (e.g., ED-0001, TASK-0001)
         local_tasks.extend(list(folder_path.glob('*-[0-9]*.md')))
 
 local_count = len(local_tasks)
@@ -1192,7 +1192,7 @@ try:
         # Find which tasks might be missing
         linear_ids = set()
         for issue in issues:
-            # Extract task ID from title like "[ASK-0001] Title"
+            # Extract task ID from title like "[ED-0001] Title"
             title = issue['title']
             if title.startswith('[') and ']' in title:
                 task_id = title[1:title.index(']')]
@@ -1200,7 +1200,7 @@ try:
 
         local_ids = set()
         for task_file in local_tasks:
-            # Extract task ID from filename like ASK-0001-description.md
+            # Extract task ID from filename like ED-0001-description.md
             name = task_file.stem
             if '-' in name:
                 parts = name.split('-')
@@ -1277,8 +1277,8 @@ def print_help():
     """Print help message."""
     print(
         """
-Project CLI - Agentive Starter Kit
-==================================
+Project CLI - Epistemic Drift
+==============================
 
 Usage: ./scripts/project <command> [options]
 
@@ -1313,8 +1313,8 @@ Other:
   version              Show version information
 
 Examples:
-  ./project complete ASK-0001    Move task to done, update Status
-  ./project move ASK-0002 todo   Move task to todo folder
+  ./project complete ED-0001    Move task to done, update Status
+  ./project move ED-0002 todo   Move task to todo folder
   ./project validate             Check all statuses match folders
   ./project reconfigure          Update project identity after pulling upstream
   ./project reconfigure --verify Same + verify no leaks remain

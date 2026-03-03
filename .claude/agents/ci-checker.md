@@ -42,7 +42,7 @@ fi
 ```
 
 **If repos don't match**, tell the user to run `gh repo set-default` before proceeding.
-This is a common issue after cloning from the starter kit.
+This is a common issue after cloning from a template.
 
 ## Verification Protocol
 

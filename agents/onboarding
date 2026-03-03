@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Agentive Starter Kit - First-Run Onboarding
+# Epistemic Drift - First-Run Onboarding
 # Launches planner with full context for new project setup
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -19,7 +19,7 @@ NC='\033[0m'
 # Display welcome banner
 echo -e "${CYAN}╔════════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${CYAN}║                                                                ║${NC}"
-echo -e "${CYAN}║   ${GREEN}🚀 Agentive Starter Kit - First-Run Onboarding${CYAN}              ║${NC}"
+echo -e "${CYAN}║   ${GREEN}🚀 Epistemic Drift - First-Run Onboarding${CYAN}                   ║${NC}"
 echo -e "${CYAN}║                                                                ║${NC}"
 echo -e "${CYAN}║   ${NC}Welcome! This will configure your new agentive project.${CYAN}      ║${NC}"
 echo -e "${CYAN}║   ${NC}planner (your planning agent) will guide you through setup.${CYAN}   ║${NC}"

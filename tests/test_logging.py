@@ -36,13 +36,13 @@ from scripts.logging_config import performance_logged, setup_logging
 def reset_loggers():
     """Reset logging state between tests."""
     # Clear all handlers from test loggers before each test
-    for name in ["test.logger", "test.debug", "test.file", "agentive.perf"]:
+    for name in ["test.logger", "test.debug", "test.file", "epistemic_drift.perf"]:
         logger = logging.getLogger(name)
         logger.handlers = []
         logger.setLevel(logging.NOTSET)
     yield
     # Cleanup after test
-    for name in ["test.logger", "test.debug", "test.file", "agentive.perf"]:
+    for name in ["test.logger", "test.debug", "test.file", "epistemic_drift.perf"]:
         logger = logging.getLogger(name)
         logger.handlers = []
 
@@ -209,7 +209,7 @@ class TestPerformanceLogged:
             time.sleep(1.1)
             return "done"
 
-        with caplog.at_level(logging.INFO, logger="agentive.perf"):
+        with caplog.at_level(logging.INFO, logger="epistemic_drift.perf"):
             result = slow_func()
 
         assert result == "done"
@@ -223,7 +223,7 @@ class TestPerformanceLogged:
         def fast_func():
             return "quick"
 
-        with caplog.at_level(logging.INFO, logger="agentive.perf"):
+        with caplog.at_level(logging.INFO, logger="epistemic_drift.perf"):
             result = fast_func()
 
         assert result == "quick"
@@ -236,7 +236,7 @@ class TestPerformanceLogged:
         def failing_func():
             raise ValueError("test error")
 
-        with caplog.at_level(logging.ERROR, logger="agentive.perf"):
+        with caplog.at_level(logging.ERROR, logger="epistemic_drift.perf"):
             with pytest.raises(ValueError):
                 failing_func()
 
@@ -264,12 +264,12 @@ class TestLoggingIntegration:
 
     def test_hierarchical_loggers(self, caplog):
         """Child loggers inherit parent configuration."""
-        parent = setup_logging("agentive")
-        child = setup_logging("agentive.sync")
+        parent = setup_logging("epistemic_drift")
+        child = setup_logging("epistemic_drift.sync")
 
         # Both should be configured independently
-        assert parent.name == "agentive"
-        assert child.name == "agentive.sync"
+        assert parent.name == "epistemic_drift"
+        assert child.name == "epistemic_drift.sync"
 
     def test_emoji_prefixes_preserved(self, capsys):
         """Emoji prefixes in log messages are preserved."""

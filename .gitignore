@@ -15,6 +15,7 @@ downloads/
 eggs/
 .eggs/
 lib/
+!src/lib/
 lib64/
 parts/
 sdist/
@@ -93,6 +94,12 @@ $RECYCLE.BIN/
 *.drp
 *.drt
 resolve_backups/
+
+# Node.js
+node_modules/
+
+# Astro
+.astro/
 
 # Project specific
 *.log

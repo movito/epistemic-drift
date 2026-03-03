@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Agentive Starter Kit - Agent Launcher v1.0.0
+# Epistemic Drift - Agent Launcher v1.0.0
 # Reads Claude Code native agent definitions from .claude/agents/
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -107,7 +107,7 @@ get_agent_model() {
 # Display header
 display_header() {
     echo -e "${BLUE}========================================${NC}"
-    echo -e "${BLUE}   Agentive Starter Kit v1.0.0        ${NC}"
+    echo -e "${BLUE}   Epistemic Drift v1.0.0             ${NC}"
     echo -e "${BLUE}   Agent Launcher                     ${NC}"
     echo -e "${BLUE}========================================${NC}"
     echo

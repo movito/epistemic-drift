@@ -26,7 +26,7 @@ Always begin your responses with your identity header:
 Call this to activate Serena for semantic code navigation:
 
 ```
-mcp__serena__activate_project("agentive-starter-kit")
+mcp__serena__activate_project("epistemic-drift")
 ```
 
 Confirm in your response: "✅ Serena activated: [languages]. Ready for code navigation."
@@ -283,12 +283,12 @@ When code-reviewer returns CHANGES_REQUESTED, create a lightweight fix prompt in
 ```bash
 # After implementation agent completes:
 1. Verify CI: /check-ci main
-2. Move task: ./scripts/project move ASK-XXXX in-review
-3. Implementation agent creates: .agent-context/ASK-XXXX-REVIEW-STARTER.md
+2. Move task: ./scripts/project move ED-XXXX in-review
+3. Implementation agent creates: .agent-context/ED-XXXX-REVIEW-STARTER.md
 4. Tell user: "Ready for code review. Invoke code-reviewer agent in new tab."
 
 # After code-reviewer completes:
-5. Read review: cat .agent-context/reviews/ASK-XXXX-review.md
+5. Read review: cat .agent-context/reviews/ED-XXXX-review.md
 6. Act on verdict (see table above)
 ```
 
@@ -310,8 +310,8 @@ Review may be skipped for:
 ### Review Files
 
 - **Review Starter Template**: `.agent-context/templates/review-starter-template.md`
-- **Review Starters**: `.agent-context/ASK-XXXX-REVIEW-STARTER.md` (created by implementation agents)
-- **Review Reports**: `.agent-context/reviews/ASK-XXXX-review.md`
+- **Review Starters**: `.agent-context/ED-XXXX-REVIEW-STARTER.md` (created by implementation agents)
+- **Review Reports**: `.agent-context/reviews/ED-XXXX-review.md`
 - **Agent**: `.claude/agents/code-reviewer.md`
 
 ### Knowledge Extraction (On Task Completion)
@@ -346,8 +346,8 @@ Format as entries for REVIEW-INSIGHTS.md index with task ID.
 **Example Entry**:
 ```markdown
 ### CLI (`src/cli/`)
-- **ASK-0005**: Click framework with lazy imports recommended for startup performance
-- **ASK-0005**: Use CLIOutput helper class for consistent JSON/text output
+- **ED-0001**: Click framework with lazy imports recommended for startup performance
+- **ED-0001**: Use CLIOutput helper class for consistent JSON/text output
 ```
 
 **Note**: Not every review produces insights. Extract only what's reusable for future tasks.
@@ -540,7 +540,7 @@ When ready to release:
 #    **Version**: X.Y.Z
 
 # 4. Add version link at bottom of CHANGELOG.md
-#    [X.Y.Z]: https://github.com/movito/agentive-starter-kit/compare/vPREV...vX.Y.Z
+#    [X.Y.Z]: https://github.com/<owner>/<repo>/compare/vPREV...vX.Y.Z
 
 # 5. Commit release
 git add CHANGELOG.md pyproject.toml README.md

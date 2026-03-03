@@ -56,8 +56,8 @@ This command:
 
 **Example**:
 ```bash
-./scripts/project start ASK-0042
-# Output: Moved ASK-0042 to 3-in-progress/, updated Status to In Progress
+./scripts/project start ED-0001
+# Output: Moved ED-0001 to 3-in-progress/, updated Status to In Progress
 ```
 
 ### Completing a Task

@@ -137,5 +137,5 @@ def example_function():
 
 **Template Version**: 1.1.0
 **Last Updated**: 2025-11-09
-**Project**: agentive-starter-kit
+**Project**: epistemic-drift
 **Naming Convention**: ADR-####-description.md (four-digit counter with ADR- prefix)

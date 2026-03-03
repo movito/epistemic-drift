@@ -64,7 +64,7 @@ gif_creator               -> Record interaction as GIF
 If Serena MCP is available, activate the project:
 
 ```text
-mcp__serena__activate_project("agentive-starter-kit")
+mcp__serena__activate_project("epistemic-drift")
 ```
 
 Confirm in your response: "Serena activated: [languages]. Ready for code navigation."

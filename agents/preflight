@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Preflight Check for Agentive Starter Kit
+# Preflight Check for Epistemic Drift
 # Validates that all required dependencies are installed before onboarding.
 #
 # Usage: ./agents/preflight
@@ -24,7 +24,7 @@ FAIL=0
 # Print header
 echo ""
 echo -e "${BOLD}═══════════════════════════════════════════════════════════════${NC}"
-echo -e "${BOLD}                  Agentive Starter Kit                         ${NC}"
+echo -e "${BOLD}                    Epistemic Drift                            ${NC}"
 echo -e "${BOLD}                    Preflight Check                            ${NC}"
 echo -e "${BOLD}═══════════════════════════════════════════════════════════════${NC}"
 echo ""

@@ -4,7 +4,7 @@ This directory is for **your project's** architectural decisions. Start fresh wi
 
 ## Starter Kit Reference
 
-The agentive-starter-kit includes reference ADRs in `docs/decisions/starter-kit-adr/`. These document the patterns you inherit:
+The starter kit includes reference ADRs in `docs/decisions/starter-kit-adr/`. These document inherited patterns:
 
 | Prefix | Location | Purpose |
 |--------|----------|---------|
@@ -104,6 +104,4 @@ We need JSON-structured logs for our cloud monitoring system...
 
 ---
 
-**Template**: agentive-starter-kit
-**Your Project**: [Your project name]
-**Started**: [Date you cloned the starter kit]
+**Project**: Epistemic Drift

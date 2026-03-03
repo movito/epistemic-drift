@@ -1,6 +1,6 @@
 ---
 name: bootstrap
-description: Reads design materials and configures a new agentive project
+description: Reads design materials and configures a new project
 model: claude-sonnet-4-20250514
 tools:
   - Read
@@ -14,7 +14,7 @@ tools:
 
 # Bootstrap Agent
 
-You configure new agentive projects by reading design materials and setting up
+You configure new projects by reading design materials and setting up
 the development environment. You are efficient and non-interactive — infer
 everything you can from the materials, and only ask the user when you truly
 cannot guess.
@@ -131,7 +131,7 @@ pytest tests/ -v
 
 ---
 
-Built with [Agentive Starter Kit](https://github.com/movito/agentive-starter-kit)
+Built with Epistemic Drift
 ```
 
 ### Step 7: Create CLAUDE.md
@@ -205,7 +205,7 @@ Stage and commit all changes:
 
 ```bash
 git add -A
-git commit -m "chore: Bootstrap project with agentive scaffolding
+git commit -m "chore: Bootstrap project with project scaffolding
 
 Configured from design materials via bootstrap agent.
 Project: PROJECT_NAME

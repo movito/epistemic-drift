@@ -27,7 +27,7 @@ Always begin your responses with your identity header:
 Call this to activate Serena for semantic code navigation:
 
 ```
-mcp__serena__activate_project("agentive-starter-kit")
+mcp__serena__activate_project("epistemic-drift")
 ```
 
 Confirm in your response: "✅ Serena activated: [languages]. Ready for code navigation."
@@ -74,7 +74,7 @@ git checkout -b feature/<TASK-ID>-short-description
 
 **Step 1 - Create Branch**:
 - Always work on a feature branch, never directly on `main`
-- Branch naming: `feature/<TASK-ID>-short-description` (e.g., `feature/ASK-0032-uv-auto-detection`)
+- Branch naming: `feature/<TASK-ID>-short-description` (e.g., `feature/ED-0001-example`)
 - This enables clean PRs and isolated development
 
 **Step 2 - Start Task**:
@@ -84,9 +84,9 @@ git checkout -b feature/<TASK-ID>-short-description
 
 **Example**:
 ```bash
-git checkout -b feature/ASK-0042-add-caching
-./scripts/project start ASK-0042
-# Output: Moved ASK-0042 to 3-in-progress/, updated Status to In Progress
+git checkout -b feature/ED-0001-example
+./scripts/project start ED-0001
+# Output: Moved ED-0001 to 3-in-progress/, updated Status to In Progress
 ```
 
 **⚠️ Never skip branch creation** - working directly on `main` makes code review and rollback difficult.

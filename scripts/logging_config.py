@@ -2,7 +2,7 @@
 Logging Configuration
 =====================
 
-Configurable logging infrastructure for the agentive-starter-kit.
+Configurable logging infrastructure for epistemic-drift.
 
 Features:
     - Environment variable configuration (LOG_LEVEL, LOG_FILE)
@@ -13,7 +13,7 @@ Features:
 Usage:
     from logging_config import setup_logging, performance_logged
 
-    logger = setup_logging("agentive.sync")
+    logger = setup_logging("epistemic_drift.sync")
     logger.info("✅ Task synced successfully")
 
     @performance_logged
@@ -38,12 +38,12 @@ from typing import Callable, TypeVar
 F = TypeVar("F", bound=Callable)
 
 
-def setup_logging(name: str = "agentive") -> logging.Logger:
+def setup_logging(name: str = "epistemic_drift") -> logging.Logger:
     """
     Configure logging for the application.
 
     Args:
-        name: Logger name (hierarchical, e.g., "agentive.sync")
+        name: Logger name (hierarchical, e.g., "epistemic_drift.sync")
 
     Returns:
         Configured logger instance
@@ -53,7 +53,7 @@ def setup_logging(name: str = "agentive") -> logging.Logger:
         LOG_FILE: Path to log file. If set, enables file logging with rotation.
 
     Example:
-        logger = setup_logging("agentive.sync")
+        logger = setup_logging("epistemic_drift.sync")
         logger.info("✅ Task synced")
         logger.debug("Processing file: %s", filename)
     """
@@ -129,7 +129,7 @@ def performance_logged(func: F) -> F:
 
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        logger = logging.getLogger("agentive.perf")
+        logger = logging.getLogger("epistemic_drift.perf")
         start = time.perf_counter()
 
         try:

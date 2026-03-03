@@ -490,4 +490,4 @@ If any verification fails, fix before completing.
 
 **Template Version**: 1.0.0
 **Last Updated**: 2025-11-06
-**Project**: agentive-starter-kit
+**Project**: epistemic-drift

@@ -1,4 +1,4 @@
-# Project configuration for Python projects using the Agentive Starter Kit
+# Project configuration for Epistemic Drift
 # See: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
 
 [build-system]
@@ -12,14 +12,14 @@ build-backend = "setuptools.build_meta"
 packages = []
 
 [project]
-name = "your-project-name"  # TODO: Change this to your project name
-version = "0.3.2"
-description = "Your project description"  # TODO: Update description
+name = "epistemic-drift"
+version = "0.1.0"
+description = "Interactive concept map exploring how generative AI extends cognition while creating epistemic vulnerabilities"
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
 license = {text = "MIT"}
 authors = [
-    {name = "Your Name", email = "you@example.com"},  # TODO: Update author
+    {name = "broadcaster_three"},
 ]
 dependencies = []
 
