@@ -1,17 +1,18 @@
 {
   "planner": {
-    "status": "idle",
-    "current_task": null,
-    "task_started": null,
-    "brief_note": "Ready for task coordination",
-    "details_link": null
+    "status": "completed",
+    "current_task": "ED-0006",
+    "task_started": "2026-03-03",
+    "brief_note": "COMPLETE: ED-0006 task spec and handoff ready for feature-developer",
+    "details_link": "delegation/tasks/2-todo/ED-0006-fix-cluster-label-position-on-drag.md",
+    "handoff_file": ".agent-context/ED-0006-HANDOFF-feature-developer.md"
   },
   "feature-developer": {
-    "status": "idle",
-    "current_task": null,
-    "task_started": null,
-    "brief_note": "Ready for implementation tasks",
-    "details_link": null
+    "status": "assigned",
+    "current_task": "ED-0006",
+    "task_started": "2026-03-03",
+    "brief_note": "Assigned: Fix cluster label position on node drag",
+    "details_link": "delegation/tasks/2-todo/ED-0006-fix-cluster-label-position-on-drag.md"
   },
   "code-reviewer": {
     "status": "idle",

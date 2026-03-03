@@ -1,0 +1,42 @@
+version: 1
+interfaces:
+  agent_dir: .claude/agents/
+  spawn_command: env -u CLAUDECODE agents/launch $AGENT_NAME
+  bus_file: .dispatch/bus.jsonl
+  starter_dir: .agent-context/
+  task_dir: delegation/tasks/
+  session_manager: tmux
+  notification: terminal
+  # spawn_delay: 2.0  # seconds to wait for agent readiness before delivering starter
+transitions:
+- name: planning-to-development
+  when:
+    type: phase_complete
+    source_agent: planner
+  gates:
+  - type: human
+  then:
+    spawn: feature-developer-v3
+    starter_from: payload.starter_path
+  mode: approve
+- name: development-complete
+  when:
+    type: phase_complete
+    source_agent: feature-developer-v3
+  then:
+    notify: planner
+  mode: notify
+- name: agent-needs-help
+  when:
+    type: agent_blocked
+  then:
+    notify: "Agent blocked \u2014 check tmux session"
+  mode: notify
+
+# Trust escalation (optional, for gradual autonomy)
+# Add transition names here to run them automatically (skip approval prompt).
+# These settings belong in config.local.yml so they're personal, not team-wide.
+# Manage with: dispatch trust --list | dispatch trust <name> auto|reset
+# Example: auto_transitions: [development-to-review]
+trust:
+  auto_transitions: []
