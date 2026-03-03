@@ -26,16 +26,26 @@ export default function Node({
 }: NodeProps) {
   const dragging = useRef(false);
   const dragOffset = useRef({ x: 0, y: 0 });
+  const groupRef = useRef<SVGGElement>(null);
+
+  /** Convert screen (client) coordinates to SVG coordinate space,
+   *  accounting for viewBox mapping, pan, and zoom. */
+  const clientToSVG = (clientX: number, clientY: number) => {
+    const group = groupRef.current;
+    if (!group) return null;
+    const ctm = group.getScreenCTM();
+    if (!ctm) return null;
+    return new DOMPoint(clientX, clientY).matrixTransform(ctm.inverse());
+  };
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent) => {
       e.stopPropagation();
+      const pt = clientToSVG(e.clientX, e.clientY);
+      if (!pt) return;
       dragging.current = true;
-      dragOffset.current = {
-        x: e.clientX - node.x,
-        y: e.clientY - node.y,
-      };
-      (e.target as SVGElement).setPointerCapture(e.pointerId);
+      dragOffset.current = { x: pt.x - node.x, y: pt.y - node.y };
+      groupRef.current?.setPointerCapture(e.pointerId);
     },
     [node.x, node.y]
   );
@@ -44,13 +54,9 @@ export default function Node({
     (e: React.PointerEvent) => {
       if (!dragging.current) return;
       e.stopPropagation();
-      // We need to account for the current SVG transform (scale)
-      // The parent ConceptMap will pass the inverse scale via CSS variable or we compute here
-      onDrag(
-        node.id,
-        e.clientX - dragOffset.current.x,
-        e.clientY - dragOffset.current.y
-      );
+      const pt = clientToSVG(e.clientX, e.clientY);
+      if (!pt) return;
+      onDrag(node.id, pt.x - dragOffset.current.x, pt.y - dragOffset.current.y);
     },
     [node.id, onDrag]
   );
@@ -81,6 +87,7 @@ export default function Node({
 
   return (
     <g
+      ref={groupRef}
       style={{
         cursor: "grab",
         transition: "opacity var(--transition-fast)",
