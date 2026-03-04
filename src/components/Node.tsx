@@ -66,11 +66,20 @@ export default function Node({
       if (dragging.current) {
         dragging.current = false;
         e.stopPropagation();
-        // Only select if it wasn't a drag (small movement threshold)
+        if (groupRef.current?.hasPointerCapture(e.pointerId)) {
+          groupRef.current.releasePointerCapture(e.pointerId);
+        }
       }
     },
     []
   );
+
+  const handlePointerCancel = useCallback((e: React.PointerEvent) => {
+    dragging.current = false;
+    if (groupRef.current?.hasPointerCapture(e.pointerId)) {
+      groupRef.current.releasePointerCapture(e.pointerId);
+    }
+  }, []);
 
   const handleClick = useCallback(
     (e: React.MouseEvent) => {
@@ -96,6 +105,7 @@ export default function Node({
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerCancel}
       onClick={handleClick}
       onMouseEnter={() => onHoverStart(node.id)}
       onMouseLeave={onHoverEnd}
