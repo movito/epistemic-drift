@@ -113,7 +113,7 @@ export default function ConceptMap() {
       >
         <h1
           style={{
-            fontSize: 20,
+            fontSize: "clamp(14px, 2.5vw, 20px)",
             fontWeight: 600,
             color: "var(--color-text)",
             margin: 0,
@@ -123,10 +123,10 @@ export default function ConceptMap() {
         </h1>
         <p
           style={{
-            fontSize: 12,
+            fontSize: "clamp(10px, 1.5vw, 12px)",
             color: "var(--color-text-muted)",
             marginTop: 4,
-            maxWidth: 500,
+            maxWidth: "min(500px, 50vw)",
             lineHeight: 1.4,
           }}
         >

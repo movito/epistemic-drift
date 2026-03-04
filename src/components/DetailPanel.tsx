@@ -15,6 +15,8 @@ export default function DetailPanel({ node, cluster }: DetailPanelProps) {
         bottom: 0,
         left: 0,
         right: 0,
+        maxHeight: "40vh",
+        overflowY: "auto",
         background: "var(--color-surface)",
         borderTop: "1px solid var(--color-border)",
         padding: "16px 24px",
@@ -42,10 +44,10 @@ export default function DetailPanel({ node, cluster }: DetailPanelProps) {
             marginTop: 4,
           }}
         />
-        <div>
+        <div style={{ minWidth: 0 }}>
           <div
             style={{
-              fontSize: 14,
+              fontSize: "clamp(12px, 1.8vw, 14px)",
               fontWeight: 600,
               color: "var(--color-text)",
               marginBottom: 4,
@@ -55,7 +57,7 @@ export default function DetailPanel({ node, cluster }: DetailPanelProps) {
           </div>
           <div
             style={{
-              fontSize: 13,
+              fontSize: "clamp(11px, 1.6vw, 13px)",
               color: "var(--color-text-secondary)",
               lineHeight: 1.5,
             }}
