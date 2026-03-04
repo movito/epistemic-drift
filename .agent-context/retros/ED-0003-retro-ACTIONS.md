@@ -20,7 +20,7 @@ To allow force pushes on feature branches only, the user could replace these wit
 "Bash(git push -f* origin main*)",
 ```
 This would deny force push to main but allow it on feature branches.
-**Status**: Awaiting user decision.
+**Status**: Done. Deny rules updated to only block force push to main (`93c5385`).
 
 ### 2. Add `type="button"` to patterns.yml
 **Finding**: Recurring a11y finding -- buttons without explicit type attribute.
