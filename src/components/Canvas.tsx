@@ -1,4 +1,4 @@
-import { useRef, useCallback, type ReactNode } from "react";
+import { useRef, useCallback, useEffect, type ReactNode } from "react";
 import type { ViewTransform } from "../lib/types";
 
 interface CanvasProps {
@@ -21,6 +21,10 @@ export default function Canvas({
 }: CanvasProps) {
   const isPanning = useRef(false);
   const panStart = useRef({ x: 0, y: 0 });
+  const lastTouchDist = useRef<number | null>(null);
+  const lastTouchMid = useRef<{ x: number; y: number } | null>(null);
+  const transformRef = useRef(transform);
+  transformRef.current = transform;
 
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
@@ -88,15 +92,89 @@ export default function Canvas({
     [svgRef, onBackgroundClick]
   );
 
+  // Touch pinch-to-zoom and two-finger pan
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+
+    function getTouchDistance(t1: Touch, t2: Touch): number {
+      const dx = t1.clientX - t2.clientX;
+      const dy = t1.clientY - t2.clientY;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    function getTouchMidpoint(t1: Touch, t2: Touch) {
+      return {
+        x: (t1.clientX + t2.clientX) / 2,
+        y: (t1.clientY + t2.clientY) / 2,
+      };
+    }
+
+    function handleTouchStart(e: TouchEvent) {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        lastTouchDist.current = getTouchDistance(e.touches[0], e.touches[1]);
+        lastTouchMid.current = getTouchMidpoint(e.touches[0], e.touches[1]);
+      }
+    }
+
+    function handleTouchMove(e: TouchEvent) {
+      if (e.touches.length !== 2) return;
+      if (lastTouchDist.current === null || lastTouchMid.current === null) return;
+      e.preventDefault();
+
+      const t = transformRef.current;
+      const newDist = getTouchDistance(e.touches[0], e.touches[1]);
+      const newMid = getTouchMidpoint(e.touches[0], e.touches[1]);
+
+      // Zoom
+      const zoomFactor = newDist / lastTouchDist.current;
+      const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, t.scale * zoomFactor));
+      const scaleChange = newScale / t.scale;
+
+      // Pan + zoom centered on midpoint
+      const rect = svg!.getBoundingClientRect();
+      const midX = newMid.x - rect.left;
+      const midY = newMid.y - rect.top;
+      const panDx = newMid.x - lastTouchMid.current.x;
+      const panDy = newMid.y - lastTouchMid.current.y;
+
+      const newX = midX - (midX - t.x) * scaleChange + panDx;
+      const newY = midY - (midY - t.y) * scaleChange + panDy;
+
+      onTransformChange({ x: newX, y: newY, scale: newScale });
+
+      lastTouchDist.current = newDist;
+      lastTouchMid.current = newMid;
+    }
+
+    function handleTouchEnd() {
+      lastTouchDist.current = null;
+      lastTouchMid.current = null;
+    }
+
+    svg.addEventListener("touchstart", handleTouchStart, { passive: false });
+    svg.addEventListener("touchmove", handleTouchMove, { passive: false });
+    svg.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      svg.removeEventListener("touchstart", handleTouchStart);
+      svg.removeEventListener("touchmove", handleTouchMove);
+      svg.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [svgRef, onTransformChange]);
+
   return (
     <svg
       ref={svgRef}
       viewBox="0 0 1020 760"
+      preserveAspectRatio="xMidYMid meet"
       style={{
         width: "100%",
         height: "100vh",
         display: "block",
         background: "var(--color-bg)",
+        touchAction: "none",
       }}
       onWheel={handleWheel}
       onPointerDown={handlePointerDown}

@@ -10,16 +10,7 @@ export default function ExportControls({
   onDumpPositions,
 }: ExportControlsProps) {
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: 16,
-        right: 16,
-        display: "flex",
-        gap: 8,
-        zIndex: 10,
-      }}
-    >
+    <div className="export-controls">
       <button type="button" className="export-btn" onClick={onExportSVG} title="Export SVG (S)">
         SVG
       </button>

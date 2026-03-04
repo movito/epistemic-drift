@@ -106,7 +106,16 @@ body {
   }
 }
 
-/* ── Export buttons ──────────────────────────────────── */
+/* ── Export controls ────────────────────────────────── */
+
+.export-controls {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
 
 .export-btn {
   padding: 6px 12px;
@@ -124,4 +133,16 @@ body {
 .export-btn:hover {
   background: var(--color-bg);
   transform: scale(1.03);
+}
+
+/* ── Narrow screens ─────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .export-controls {
+    top: auto;
+    bottom: 48px;
+    right: 16px;
+    flex-direction: column;
+    gap: 4px;
+  }
 }
