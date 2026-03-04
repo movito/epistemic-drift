@@ -114,6 +114,22 @@ visual properties. Edit this file to change content; no code changes needed.
   fire-and-forget modules log and continue (see `patterns.yml` -> `error_strategies`)
 - Run `python3 scripts/pattern_lint.py <files>` to check for pattern violations
 
+## MCP Servers
+
+### A11y Accessibility (`a11y-accessibility`)
+
+axe-core accessibility testing via MCP. Available tools:
+
+- `test_accessibility` — audit a live URL (e.g. `http://localhost:4321`)
+- `test_html_string` — test raw HTML snippets
+- `check_color_contrast` — validate color pairs against WCAG
+- `check_aria_attributes` — verify ARIA usage
+- `get_rules` — list WCAG rules (filterable by standard)
+- `check_orientation_lock` — detect forced orientation
+
+**When to use**: Run `test_accessibility` against `localhost:4321` before opening
+PRs that touch front-end files. See ADR-0001 for the full accessibility strategy.
+
 ## Agent Context
 
 ### Key Agents

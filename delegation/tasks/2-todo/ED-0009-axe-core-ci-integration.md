@@ -94,11 +94,20 @@ test('concept map is keyboard accessible', async ({ page }) => {
   await page.goto('/');
   await page.waitForSelector('[data-canvas]');
 
-  // Tab through interactive elements
-  await page.keyboard.press('Tab');
-  // Verify focus is visible and on an interactive element
-  const focused = await page.evaluate(() => document.activeElement?.tagName);
-  expect(focused).toBeTruthy();
+  // Tab through interactive elements and verify focus lands on them
+  const focusableCount = await page.evaluate(() =>
+    document.querySelectorAll('[tabindex], a[href], button').length
+  );
+
+  for (let i = 0; i < Math.min(focusableCount, 5); i++) {
+    await page.keyboard.press('Tab');
+    const focused = await page.evaluate(() => ({
+      tag: document.activeElement?.tagName,
+      visible: document.activeElement?.getBoundingClientRect().width > 0,
+    }));
+    expect(focused.tag).not.toBe('BODY');
+    expect(focused.visible).toBe(true);
+  }
 });
 ```
 
@@ -122,9 +131,12 @@ Update `.github/workflows/ci.yml` to include:
 If the current site has existing violations:
 1. Run the test locally first: `npx playwright test`
 2. Fix any violations that are quick wins
-3. For remaining issues, use `axe.disableRules()` with a comment and create
-   backlog tasks to fix them
+3. For remaining issues, use `axe.disableRules()` with:
+   - A comment citing the specific WCAG criterion
+   - A link to a backlog task (create one per disabled rule in `1-backlog/`)
+   - Add all disabled rules to a tracking list in the test file header
 4. Never ship NEW violations
+5. Revisit disabled rules quarterly or when related components change
 
 ## Acceptance Criteria
 

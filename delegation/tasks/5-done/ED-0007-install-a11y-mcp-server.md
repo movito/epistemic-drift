@@ -1,6 +1,6 @@
 # ED-0007: Install A11y MCP Server
 
-**Status**: Todo
+**Status**: Done
 **Priority**: high
 **Assigned To**: feature-developer-v3
 **Estimated Effort**: 30 minutes
