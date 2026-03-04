@@ -420,6 +420,38 @@ frontend:
       onLostPointerCapture → setDragging(false)  # capture revoked
     caught_by: "CodeRabbit (ED-0002)"
 
+  button_type_attribute:
+    rule: >
+      All HTML <button> elements MUST include an explicit type attribute.
+      Without type="button", buttons inside <form> elements default to
+      type="submit", causing unexpected form submissions. Even outside
+      forms, the explicit type improves accessibility and prevents
+      future bugs if the button is later placed inside a form.
+    pattern: |
+      # Bad: missing type
+      <button onClick={handleClick}>Export</button>
+
+      # Good: explicit type
+      <button type="button" onClick={handleClick}>Export</button>
+    caught_by: "CodeRabbit (ED-0003)"
+
+  reduced_motion_media_query:
+    rule: >
+      Any CSS animation or transition added to the project MUST include
+      a prefers-reduced-motion media query that disables or reduces the
+      animation. This is a WCAG 2.1 AA requirement (2.3.3). Apply at the
+      end of the animation declarations.
+    pattern: |
+      /* Bad: animation with no reduced-motion fallback */
+      .panel-enter { animation: slideUp 300ms ease-out; }
+
+      /* Good: respect user preference */
+      .panel-enter { animation: slideUp 300ms ease-out; }
+      @media (prefers-reduced-motion: reduce) {
+        .panel-enter { animation: none; }
+      }
+    caught_by: "CodeRabbit (ED-0003)"
+
   svg_coordinate_conversion:
     rule: >
       When handling pointer events on SVG elements inside a transformed
