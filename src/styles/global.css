@@ -67,7 +67,7 @@ body {
 
 /* ── Animations ─────────────────────────────────────── */
 
-@keyframes slideUp {
+@keyframes slide-up {
   from {
     opacity: 0;
     transform: translateY(12px);
@@ -81,6 +81,7 @@ body {
 /* ── SVG Node interactions ──────────────────────────── */
 
 .node-group {
+  cursor: grab;
   transform-origin: var(--cx) var(--cy);
   transition: opacity var(--transition-fast), transform var(--transition-fast);
 }

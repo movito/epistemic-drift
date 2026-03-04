@@ -33,13 +33,14 @@ export default function ExportControls({
         zIndex: 10,
       }}
     >
-      <button className="export-btn" style={buttonStyle} onClick={onExportSVG} title="Export SVG (S)">
+      <button type="button" className="export-btn" style={buttonStyle} onClick={onExportSVG} title="Export SVG (S)">
         SVG
       </button>
-      <button className="export-btn" style={buttonStyle} onClick={onExportPNG} title="Export PNG (P)">
+      <button type="button" className="export-btn" style={buttonStyle} onClick={onExportPNG} title="Export PNG (P)">
         PNG
       </button>
       <button
+        type="button"
         className="export-btn"
         style={buttonStyle}
         onClick={onDumpPositions}
