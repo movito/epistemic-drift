@@ -58,17 +58,18 @@ test.describe('WCAG 2.2 AA Compliance', () => {
     const focusableSelector = [
       '[tabindex]:not([tabindex="-1"])',
       'a[href]',
-      'button',
-      'input:not([type="hidden"])',
-      'select',
-      'textarea',
-      '[contenteditable]',
+      'button:not([disabled])',
+      'input:not([type="hidden"]):not([disabled])',
+      'select:not([disabled])',
+      'textarea:not([disabled])',
+      '[contenteditable]:not([contenteditable="false"])',
       'details > summary',
     ].join(', ');
     const focusableCount = await page.evaluate(
       (sel) => document.querySelectorAll(sel).length,
       focusableSelector,
     );
+    expect(focusableCount, 'Expected at least one tabbable element').toBeGreaterThan(0);
 
     // Tab through up to 5 focusable elements and verify focus is visible
     const tabCount = Math.min(focusableCount, 5);

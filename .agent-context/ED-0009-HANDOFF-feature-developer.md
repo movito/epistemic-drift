@@ -157,6 +157,6 @@ They may or may not have `tabindex` yet — check during implementation.
 ---
 
 **Task File**: `delegation/tasks/2-todo/ED-0009-axe-core-ci-integration.md`
-**Evaluation Log**: `.adversarial/logs/ED-0009-axe-core-ci-integration--arch-review-fast.md.md`
+**Evaluation Log**: `.adversarial/logs/ED-0009-axe-core-ci-integration--arch-review-fast.md`
 **Handoff Date**: 2026-03-04
 **Coordinator**: planner2
