@@ -22,7 +22,7 @@ export default function DetailPanel({ node, cluster }: DetailPanelProps) {
         padding: "16px 24px",
         fontFamily: "var(--font-body)",
         zIndex: 10,
-        animation: "slideUp 0.2s ease",
+        animation: "slide-up 0.2s ease",
       }}
     >
       <div

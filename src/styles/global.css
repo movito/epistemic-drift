@@ -76,7 +76,7 @@ body {
 }
 
 /* Detail panel slide-up animation */
-@keyframes slideUp {
+@keyframes slide-up {
   from {
     transform: translateY(100%);
     opacity: 0;
@@ -91,7 +91,7 @@ body {
 @media (max-width: 768px) {
   .export-controls {
     top: auto;
-    bottom: 16px;
+    bottom: 48px;
     right: 16px;
     flex-direction: column;
     gap: 4px;
