@@ -116,6 +116,6 @@ adversarial list-evaluators
 ---
 
 **Task File**: `delegation/tasks/2-todo/ED-0008-wcag-adversarial-evaluator.md`
-**Evaluation Log**: `.adversarial/logs/ED-0008-wcag-adversarial-evaluator--arch-review-fast.md.md`
+**Evaluation Log**: `.adversarial/logs/ED-0008-wcag-adversarial-evaluator--arch-review-fast.md`
 **Handoff Date**: 2026-03-04
 **Coordinator**: planner2

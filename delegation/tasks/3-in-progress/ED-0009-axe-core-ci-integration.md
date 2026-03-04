@@ -131,12 +131,13 @@ Update `.github/workflows/ci.yml` to include:
 If the current site has existing violations:
 1. Run the test locally first: `npx playwright test`
 2. Fix any violations that are quick wins
-3. For remaining issues, use `axe.disableRules()` with:
+3. For remaining issues, only use `axe.disableRules()` as a temporary exception with approval:
    - A comment citing the specific WCAG criterion
    - A link to a backlog task (create one per disabled rule in `1-backlog/`)
    - Add all disabled rules to a tracking list in the test file header
-4. Never ship NEW violations
-5. Revisit disabled rules quarterly or when related components change
+   - Set a target date for re-enabling each rule
+4. Never ship NEW violations — only suppress pre-existing issues
+5. Revisit disabled rules quarterly or when related components change; remove suppressions as fixes land
 
 ## Acceptance Criteria
 

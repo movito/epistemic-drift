@@ -55,8 +55,19 @@ test.describe('WCAG 2.2 AA Compliance', () => {
     await page.waitForSelector('[data-canvas]', { timeout: 10_000 });
 
     // Count focusable elements in the page
-    const focusableCount = await page.evaluate(() =>
-      document.querySelectorAll('[tabindex]:not([tabindex="-1"]), a[href], button').length,
+    const focusableSelector = [
+      '[tabindex]:not([tabindex="-1"])',
+      'a[href]',
+      'button',
+      'input:not([type="hidden"])',
+      'select',
+      'textarea',
+      '[contenteditable]',
+      'details > summary',
+    ].join(', ');
+    const focusableCount = await page.evaluate(
+      (sel) => document.querySelectorAll(sel).length,
+      focusableSelector,
     );
 
     // Tab through up to 5 focusable elements and verify focus is visible
@@ -73,10 +84,10 @@ test.describe('WCAG 2.2 AA Compliance', () => {
         };
       });
 
-      if (focused) {
-        expect(focused.tag).not.toBe('BODY');
-        expect(focused.visible).toBe(true);
-      }
+      // Focus must not silently fall back to <body> after Tab
+      expect(focused, `Tab ${i + 1}: focus unexpectedly on <body>`).not.toBeNull();
+      expect(focused!.tag).not.toBe('BODY');
+      expect(focused!.visible).toBe(true);
     }
   });
 });
