@@ -65,7 +65,49 @@ body {
   overflow: hidden;
 }
 
-/* Export controls */
+/* ── Animations ─────────────────────────────────────── */
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── SVG Node interactions ──────────────────────────── */
+
+.node-group {
+  cursor: grab;
+  transform-origin: var(--cx) var(--cy);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.node-group:hover {
+  transform: scale(1.05);
+}
+
+.node-group:active {
+  cursor: grabbing;
+}
+
+/* ── Reduced motion ─────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .node-group {
+    transition: none;
+  }
+
+  .node-group:hover {
+    transform: none;
+  }
+}
+
+/* ── Export controls ────────────────────────────────── */
+
 .export-controls {
   position: fixed;
   top: 16px;
@@ -75,19 +117,26 @@ body {
   z-index: 10;
 }
 
-/* Detail panel slide-up animation */
-@keyframes slide-up {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+.export-btn {
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
-/* Narrow screens: stack export controls below title area */
+.export-btn:hover {
+  background: var(--color-bg);
+  transform: scale(1.03);
+}
+
+/* ── Narrow screens ─────────────────────────────────── */
+
 @media (max-width: 768px) {
   .export-controls {
     top: auto;
