@@ -94,9 +94,34 @@ body {
   cursor: grabbing;
 }
 
+/* ── Reduced motion ─────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .node-group {
+    transition: none;
+  }
+
+  .node-group:hover {
+    transform: none;
+  }
+}
+
 /* ── Export buttons ──────────────────────────────────── */
 
+.export-btn {
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
 .export-btn:hover {
-  background: var(--color-bg) !important;
+  background: var(--color-bg);
   transform: scale(1.03);
 }

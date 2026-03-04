@@ -4,19 +4,6 @@ interface ExportControlsProps {
   onDumpPositions: () => void;
 }
 
-const buttonStyle: React.CSSProperties = {
-  padding: "6px 12px",
-  fontSize: 11,
-  fontFamily: "var(--font-body)",
-  fontWeight: 500,
-  color: "var(--color-text-secondary)",
-  background: "var(--color-surface)",
-  border: "1px solid var(--color-border)",
-  borderRadius: 6,
-  cursor: "pointer",
-  transition: "all var(--transition-fast)",
-};
-
 export default function ExportControls({
   onExportSVG,
   onExportPNG,
@@ -33,16 +20,15 @@ export default function ExportControls({
         zIndex: 10,
       }}
     >
-      <button type="button" className="export-btn" style={buttonStyle} onClick={onExportSVG} title="Export SVG (S)">
+      <button type="button" className="export-btn" onClick={onExportSVG} title="Export SVG (S)">
         SVG
       </button>
-      <button type="button" className="export-btn" style={buttonStyle} onClick={onExportPNG} title="Export PNG (P)">
+      <button type="button" className="export-btn" onClick={onExportPNG} title="Export PNG (P)">
         PNG
       </button>
       <button
         type="button"
         className="export-btn"
-        style={buttonStyle}
         onClick={onDumpPositions}
         title="Dump positions (D)"
       >
