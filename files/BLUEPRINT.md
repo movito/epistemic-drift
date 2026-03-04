@@ -54,8 +54,7 @@ interface GraphData {
   clusters: Record<string, {
     color: string;      // Stroke and label color
     fill: string;       // Background fill (rgba, low alpha)
-    label: string;      // Cluster heading text
-    labelPos?: { x: number; y: number };
+    label: string;      // Cluster heading text (positioned dynamically from bounds)
   }>;
   nodes: Array<{
     id: string;

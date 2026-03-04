@@ -29,19 +29,18 @@ export default function ClusterBackground({
         strokeWidth={1}
         strokeOpacity={0.2}
       />
-      {cluster.labelPos && (
-        <text
-          x={cluster.labelPos.x}
-          y={cluster.labelPos.y}
-          fill={cluster.color}
-          fontSize={11}
-          fontWeight={600}
-          fontFamily="var(--font-body)"
-          opacity={0.7}
-        >
-          {cluster.label}
-        </text>
-      )}
+      <text
+        x={bounds.x + bounds.width / 2}
+        y={bounds.y + 32}
+        textAnchor="middle"
+        fill={cluster.color}
+        fontSize={11}
+        fontWeight={600}
+        fontFamily="var(--font-body)"
+        opacity={0.7}
+      >
+        {cluster.label}
+      </text>
     </g>
   );
 }

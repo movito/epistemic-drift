@@ -1,6 +1,6 @@
 # ED-0006: Fix cluster label position on node drag
 
-**Status**: Todo
+**Status**: In Review
 **Priority**: medium
 **Assigned To**: feature-developer-v3
 **Estimated Effort**: 1-2 hours
@@ -62,22 +62,20 @@ rather than from the static `cluster.labelPos`.
 3. `src/data/graph.json` (optional cleanup)
    - Remove or repurpose `labelPos` entries if they're no longer used
 
-### Suggested Fix (minimal)
+### Implemented Fix
 
-In `ClusterBackground.tsx`, replace the static label coordinates:
+In `ClusterBackground.tsx`, replaced the static label coordinates with dynamic
+positioning derived from `getClusterBounds()`:
 
 ```tsx
-// Before (static):
-x={cluster.labelPos.x}
-y={cluster.labelPos.y}
-
-// After (dynamic, anchored to bottom-left of bounds):
-x={bounds.x + 8}
-y={bounds.y + bounds.height + 16}
+// Top-center anchor: horizontally centered, near top of bounds
+x={bounds.x + bounds.width / 2}
+y={bounds.y + 32}
+textAnchor="middle"
 ```
 
-The exact offsets should be tuned visually. Check existing `labelPos` values in
-`graph.json` to see where labels currently sit relative to their clusters.
+The `labelPos` field was removed from `ClusterData` and `graph.json` since
+label position is now fully derived from the dynamic bounds.
 
 ## Acceptance Criteria
 
@@ -97,8 +95,8 @@ The exact offsets should be tuned visually. Check existing `labelPos` values in
 |------|---------|
 | `src/components/ClusterBackground.tsx` | The component with the bug |
 | `src/lib/geometry.ts` | `getClusterBounds()` -- dynamic bounds computation |
-| `src/lib/types.ts` | `ClusterData` interface with `labelPos` |
-| `src/data/graph.json` | Static data including `labelPos` values |
+| `src/lib/types.ts` | `ClusterData` interface (`labelPos` removed) |
+| `src/data/graph.json` | Static data (`labelPos` removed) |
 | `src/components/ConceptMap.tsx` | Parent orchestrator, passes node state |
 
 ## Notes
