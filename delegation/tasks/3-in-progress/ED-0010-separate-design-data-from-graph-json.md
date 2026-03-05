@@ -1,6 +1,6 @@
 # ED-0010: Separate Design Data from graph.json
 
-**Status**: Todo
+**Status**: In Progress
 **Priority**: medium
 **Assigned To**: feature-developer-v3
 **Estimated Effort**: 2-4 hours

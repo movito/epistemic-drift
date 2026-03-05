@@ -6,33 +6,21 @@
   },
   "clusters": {
     "center": {
-      "color": "#1a1a2e",
-      "fill": "rgba(255,255,255,0)",
       "label": ""
     },
     "cognition": {
-      "color": "#2d6a4f",
-      "fill": "rgba(45,106,79,0.08)",
       "label": "4E Cognitive Architecture"
     },
     "failure": {
-      "color": "#9b2226",
-      "fill": "rgba(155,34,38,0.07)",
       "label": "Failure Modes"
     },
     "domain": {
-      "color": "#7b5ea7",
-      "fill": "rgba(123,94,167,0.07)",
       "label": "Domain Properties (Cynefin)"
     },
     "foundation": {
-      "color": "#b5651d",
-      "fill": "rgba(181,101,29,0.08)",
       "label": "What Must Reside in the Person"
     },
     "intensification": {
-      "color": "#555555",
-      "fill": "rgba(100,100,100,0.06)",
       "label": "Work Intensification"
     }
   },
@@ -43,7 +31,7 @@
       "x": 500, "y": 400,
       "cluster": "center",
       "description": "The knowledge worker operating in AI-augmented environments. Central question: what must reside in the person vs. what can safely reside in the tool?",
-      "radius": 48
+      "size": "large"
     },
     {
       "id": "extended",
@@ -51,7 +39,7 @@
       "x": 200, "y": 150,
       "cluster": "cognition",
       "description": "AI as cognitive prosthesis. Amplified by generative AI — the user's reach expands into unfamiliar domains. (Clark & Chalmers, 1998)",
-      "radius": 36
+      "size": "default"
     },
     {
       "id": "enacted",
@@ -59,7 +47,7 @@
       "x": 330, "y": 100,
       "cluster": "cognition",
       "description": "Knowing through doing. Practice-based understanding that builds retrieval structures integrated with the task. What AI shortcuts bypass. (4E framework)",
-      "radius": 36
+      "size": "default"
     },
     {
       "id": "embodied",
@@ -67,7 +55,7 @@
       "x": 140, "y": 280,
       "cluster": "cognition",
       "description": "The 'feels wrong' intuition. Expert pattern recognition that operates below conscious reasoning. Degrades with fatigue and disuse. (Dreyfus; 4E framework)",
-      "radius": 36
+      "size": "default"
     },
     {
       "id": "embedded",
@@ -75,7 +63,7 @@
       "x": 290, "y": 240,
       "cluster": "cognition",
       "description": "Cognition situated in social/material context. Code reviews, team expertise, institutional memory. Stressed when people act outside their epistemic niche.",
-      "radius": 36
+      "size": "default"
     },
     {
       "id": "hollowed",
@@ -83,7 +71,7 @@
       "x": 720, "y": 120,
       "cluster": "failure",
       "description": "Long-term dependency state where capacity for deep reasoning diminishes. The 'Sovereignty Trap' — choosing the path of least cognitive resistance. (Klein & Klein, 2025)",
-      "radius": 36
+      "size": "default"
     },
     {
       "id": "asleep",
@@ -91,7 +79,7 @@
       "x": 850, "y": 200,
       "cluster": "failure",
       "description": "High-quality AI produces worse human performance. Users disengage, stop checking, lose vigilance. Better AI → lazier humans. (Dell'Acqua, 2022)",
-      "radius": 36
+      "size": "default"
     },
     {
       "id": "invisible_boundary",
@@ -99,7 +87,7 @@
       "x": 780, "y": 280,
       "cluster": "failure",
       "description": "AI produces equally fluent output whether the problem is Complicated or Complex. No alarm sounds. The user who lacks enacted knowledge can't detect the transition.",
-      "radius": 36
+      "size": "default"
     },
     {
       "id": "complicated",
@@ -107,7 +95,7 @@
       "x": 780, "y": 520,
       "cluster": "domain",
       "description": "Known unknowns. Expert analysis can determine the right answer. AI-extended cognition works well here — pattern-matching established practice. (Cynefin: Sense-Analyze-Respond)",
-      "radius": 36
+      "size": "default"
     },
     {
       "id": "complex",
@@ -115,7 +103,7 @@
       "x": 850, "y": 630,
       "cluster": "domain",
       "description": "Unknown unknowns. Cause and effect only visible in retrospect. Requires probe-sense-respond. Where AI-extended-but-not-enacted cognition fails silently. (Cynefin)",
-      "radius": 36
+      "size": "default"
     },
     {
       "id": "jagged",
@@ -123,7 +111,7 @@
       "x": 680, "y": 620,
       "cluster": "domain",
       "description": "AI capabilities are unevenly distributed across tasks. The boundary is irregular and task-specific, not a clean line. Users must map it through experience. (Dell'Acqua et al., 2023)",
-      "radius": 36
+      "size": "default"
     },
     {
       "id": "layer_under",
@@ -131,7 +119,7 @@
       "x": 200, "y": 550,
       "cluster": "foundation",
       "description": "\"You really have to understand the layer under the layer at which you work.\" The foundational knowledge that enables diagnosis when the working layer breaks. (Boris Cherny, Lenny's Podcast)",
-      "radius": 38
+      "size": "default"
     },
     {
       "id": "diagnostic",
@@ -139,7 +127,7 @@
       "x": 320, "y": 640,
       "cluster": "foundation",
       "description": "The ability to switch modes: from operating through AI to reasoning about what went wrong. Itself a Complex-domain activity — recursive: you need the skill to recognize you need the skill.",
-      "radius": 36
+      "size": "default"
     },
     {
       "id": "bainbridge",
@@ -147,7 +135,7 @@
       "x": 150, "y": 680,
       "cluster": "foundation",
       "description": "Automation removes the practice needed to maintain skills required when automation fails. With AI: skills may never develop in the first place, and the need for them becomes invisible. (Bainbridge, 1983)",
-      "radius": 36
+      "size": "default"
     },
     {
       "id": "task_expansion",
@@ -155,7 +143,7 @@
       "x": 900, "y": 420,
       "cluster": "intensification",
       "description": "Workers step into responsibilities beyond their domain. PM writes code, researcher does engineering. AI makes unfamiliar tasks feel accessible. (HBR study, 2025)",
-      "radius": 32
+      "size": "small"
     },
     {
       "id": "blurred_boundaries",
@@ -163,7 +151,7 @@
       "x": 920, "y": 520,
       "cluster": "intensification",
       "description": "Work spills into breaks, evenings, early mornings. Prompting AI feels like chatting, not working. Downtime no longer provides recovery. (HBR study, 2025)",
-      "radius": 32
+      "size": "small"
     }
   ],
   "edges": [

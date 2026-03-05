@@ -6,7 +6,7 @@ import {
   useRef,
   useMemo,
 } from "react";
-import type { GraphData, NodeData, ViewTransform } from "../lib/types";
+import type { GraphData, NodeData, NodeSize, ViewTransform } from "../lib/types";
 import { exportSVG, exportPNG, dumpPositions } from "../lib/export";
 import { getClusterBounds, getEdgeLabelPoint } from "../lib/geometry";
 import Canvas from "./Canvas";
@@ -19,8 +19,68 @@ import graphData from "../data/graph.json";
 
 const data = graphData as GraphData;
 
+/** Read node size tokens from CSS custom properties with fallbacks. */
+function getNodeSizeMap(): Record<NodeSize, number> {
+  if (typeof document === "undefined") {
+    return { small: 32, default: 36, large: 48 };
+  }
+  const s = getComputedStyle(document.documentElement);
+  return {
+    small: parseFloat(s.getPropertyValue("--size-node-small")) || 32,
+    default: parseFloat(s.getPropertyValue("--size-node-default")) || 36,
+    large: parseFloat(s.getPropertyValue("--size-node-large")) || 48,
+  };
+}
+
+/** Read the large-node threshold from CSS. */
+function getLargeThreshold(): number {
+  if (typeof document === "undefined") return 40;
+  const s = getComputedStyle(document.documentElement);
+  return (
+    parseFloat(s.getPropertyValue("--size-node-large-threshold")) || 40
+  );
+}
+
+/** Resolve input nodes (with size) to runtime nodes (with radius). */
+function resolveNodes(): NodeData[] {
+  const sizeMap = getNodeSizeMap();
+  return data.nodes.map((n) => ({
+    id: n.id,
+    label: n.label,
+    x: n.x,
+    y: n.y,
+    cluster: n.cluster,
+    description: n.description,
+    radius: sizeMap[n.size],
+  }));
+}
+
+/** Resolve cluster colors from CSS custom properties. */
+function resolveClusterColors(): Record<string, { color: string; fill: string }> {
+  const fallbacks: Record<string, { color: string; fill: string }> = {
+    center: { color: "#1a1a2e", fill: "rgba(255,255,255,0)" },
+    cognition: { color: "#2d6a4f", fill: "rgba(45,106,79,0.08)" },
+    failure: { color: "#9b2226", fill: "rgba(155,34,38,0.07)" },
+    domain: { color: "#7b5ea7", fill: "rgba(123,94,167,0.07)" },
+    foundation: { color: "#b5651d", fill: "rgba(181,101,29,0.08)" },
+    intensification: { color: "#555555", fill: "rgba(100,100,100,0.06)" },
+  };
+  if (typeof document === "undefined") return fallbacks;
+  const s = getComputedStyle(document.documentElement);
+  const result: Record<string, { color: string; fill: string }> = {};
+  for (const key of Object.keys(data.clusters)) {
+    const color = s.getPropertyValue(`--cluster-${key}-color`).trim();
+    const fill = s.getPropertyValue(`--cluster-${key}-fill`).trim();
+    result[key] = {
+      color: color || fallbacks[key]?.color || "#000",
+      fill: fill || fallbacks[key]?.fill || "transparent",
+    };
+  }
+  return result;
+}
+
 export default function ConceptMap() {
-  const [nodes, setNodes] = useState<NodeData[]>(data.nodes);
+  const [nodes, setNodes] = useState<NodeData[]>(resolveNodes);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [transform, setTransform] = useState<ViewTransform>({
@@ -31,6 +91,9 @@ export default function ConceptMap() {
 
   const svgRef = useRef<SVGSVGElement>(null);
   const measureRef = useRef<SVGTextElement>(null);
+
+  const largeThreshold = useMemo(() => getLargeThreshold(), []);
+  const clusterColors = useMemo(() => resolveClusterColors(), []);
 
   // Fibonacci-ratio type scale: 8:13:21 → edge:node:cluster
   // Node font is the anchor, computed from measurement.
@@ -45,8 +108,9 @@ export default function ConceptMap() {
   // Per-node font sizes (uniform for regular, independent for large)
   const [fontSizes, setFontSizes] = useState<Map<string, number>>(() => {
     const map = new Map<string, number>();
-    for (const n of data.nodes) {
-      map.set(n.id, n.radius > 40 ? 14 : 11);
+    const resolved = resolveNodes();
+    for (const n of resolved) {
+      map.set(n.id, n.radius > largeThreshold ? 14 : 11);
     }
     return map;
   });
@@ -66,6 +130,7 @@ export default function ConceptMap() {
     const BASE_FONT = 11;
     const LARGE_BASE_FONT = 14;
     const MIN_EDGE_FONT = 7;
+    const threshold = getLargeThreshold();
 
     el.style.fontWeight = "var(--type-weight-medium)";
     el.style.fontFamily = "var(--font-body)";
@@ -73,8 +138,8 @@ export default function ConceptMap() {
     let minRegularScale = 1;
     const largeFontScales = new Map<string, number>();
 
-    for (const n of data.nodes) {
-      const isLarge = n.radius > 40;
+    for (const n of nodes) {
+      const isLarge = n.radius > threshold;
       const baseFontSize = isLarge ? LARGE_BASE_FONT : BASE_FONT;
 
       el.style.fontSize = `${baseFontSize}px`;
@@ -126,11 +191,11 @@ export default function ConceptMap() {
     });
 
     const newFontSizes = new Map<string, number>();
-    for (const n of data.nodes) {
-      newFontSizes.set(n.id, n.radius > 40 ? centralFont : nodeFont);
+    for (const n of nodes) {
+      newFontSizes.set(n.id, n.radius > threshold ? centralFont : nodeFont);
     }
     setFontSizes(newFontSizes);
-  }, []);
+  }, [nodes]);
 
   // Measure before first paint
   useLayoutEffect(() => {
@@ -278,8 +343,8 @@ export default function ConceptMap() {
   }, [nodes]);
 
   const selectedNode = selectedId ? nodeMap.get(selectedId) ?? null : null;
-  const selectedCluster = selectedNode
-    ? data.clusters[selectedNode.cluster] ?? null
+  const selectedClusterColor = selectedNode
+    ? clusterColors[selectedNode.cluster]?.color ?? null
     : null;
 
   return (
@@ -335,6 +400,8 @@ export default function ConceptMap() {
             key={key}
             clusterKey={key}
             cluster={cluster}
+            clusterColor={clusterColors[key]?.color ?? "#000"}
+            clusterFill={clusterColors[key]?.fill ?? "transparent"}
             nodes={nodes}
             fontSize={typeScale.cluster}
           />
@@ -369,7 +436,7 @@ export default function ConceptMap() {
           <Node
             key={node.id}
             node={node}
-            cluster={data.clusters[node.cluster]}
+            clusterColor={clusterColors[node.cluster]?.color ?? "#000"}
             fontSize={fontSizes.get(node.id) ?? 11}
             selected={selectedId === node.id}
             dimmed={activeId != null && !connectedIds.has(node.id)}
@@ -389,7 +456,7 @@ export default function ConceptMap() {
         />
       </Canvas>
 
-      <DetailPanel node={selectedNode} cluster={selectedCluster} />
+      <DetailPanel node={selectedNode} clusterColor={selectedClusterColor} />
 
       {/* Keyboard hint */}
       <div
