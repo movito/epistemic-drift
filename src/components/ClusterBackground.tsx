@@ -4,6 +4,8 @@ import { getClusterBounds } from "../lib/geometry";
 interface ClusterBackgroundProps {
   clusterKey: string;
   cluster: ClusterData;
+  clusterColor: string;
+  clusterFill: string;
   nodes: NodeData[];
   fontSize: number;
 }
@@ -11,6 +13,8 @@ interface ClusterBackgroundProps {
 export default function ClusterBackground({
   clusterKey,
   cluster,
+  clusterColor,
+  clusterFill,
   nodes,
   fontSize,
 }: ClusterBackgroundProps) {
@@ -27,8 +31,8 @@ export default function ClusterBackground({
         height={bounds.height}
         rx="var(--radius-lg)"
         ry="var(--radius-lg)"
-        fill={cluster.fill}
-        stroke={cluster.color}
+        fill={clusterFill}
+        stroke={clusterColor}
         strokeWidth={1}
         strokeOpacity="var(--opacity-cluster-stroke)"
       />
@@ -36,7 +40,7 @@ export default function ClusterBackground({
         x={bounds.x + bounds.width / 2}
         y={bounds.y + fontSize + 12}
         textAnchor="middle"
-        fill={cluster.color}
+        fill={clusterColor}
         fontSize={fontSize}
         fontWeight="var(--type-weight-semibold)"
         fontFamily="var(--font-body)"

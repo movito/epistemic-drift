@@ -66,6 +66,26 @@
   --space-2xl: 40px;
   --space-3xl: 80px;
 
+  /* ── Cluster colors ─────────────────────────────── */
+  --cluster-center-color: #1a1a2e;
+  --cluster-center-fill: rgba(255, 255, 255, 0);
+  --cluster-cognition-color: #2d6a4f;
+  --cluster-cognition-fill: rgba(45, 106, 79, 0.08);
+  --cluster-failure-color: #9b2226;
+  --cluster-failure-fill: rgba(155, 34, 38, 0.07);
+  --cluster-domain-color: #7b5ea7;
+  --cluster-domain-fill: rgba(123, 94, 167, 0.07);
+  --cluster-foundation-color: #b5651d;
+  --cluster-foundation-fill: rgba(181, 101, 29, 0.08);
+  --cluster-intensification-color: #555555;
+  --cluster-intensification-fill: rgba(100, 100, 100, 0.06);
+
+  /* ── Node sizes ────────────────────────────────── */
+  --size-node-small: 32;
+  --size-node-default: 36;
+  --size-node-large: 48;
+  --size-node-large-threshold: 40;
+
   /* ── Sizing ──────────────────────────────────────── */
   --stroke-node-default: 1.5;
   --stroke-node-highlighted: 2;

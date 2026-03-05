@@ -1,12 +1,12 @@
-import type { NodeData, ClusterData } from "../lib/types";
+import type { NodeData } from "../lib/types";
 
 interface DetailPanelProps {
   node: NodeData | null;
-  cluster: ClusterData | null;
+  clusterColor: string | null;
 }
 
-export default function DetailPanel({ node, cluster }: DetailPanelProps) {
-  if (!node || !cluster) return null;
+export default function DetailPanel({ node, clusterColor }: DetailPanelProps) {
+  if (!node || !clusterColor) return null;
 
   return (
     <div
@@ -39,7 +39,7 @@ export default function DetailPanel({ node, cluster }: DetailPanelProps) {
             width: "var(--size-indicator)",
             height: "var(--size-indicator)",
             borderRadius: "50%",
-            background: cluster.color,
+            background: clusterColor,
             flexShrink: 0,
             marginTop: "var(--space-xs)",
           }}

@@ -1,6 +1,6 @@
+export type NodeSize = "small" | "default" | "large";
+
 export interface ClusterData {
-  color: string;
-  fill: string;
   label: string;
 }
 
@@ -12,6 +12,16 @@ export interface NodeData {
   cluster: string;
   description: string;
   radius: number;
+}
+
+export interface NodeDataInput {
+  id: string;
+  label: string;
+  x: number;
+  y: number;
+  cluster: string;
+  description: string;
+  size: NodeSize;
 }
 
 export interface EdgeData {
@@ -30,7 +40,7 @@ export interface GraphMeta {
 export interface GraphData {
   meta: GraphMeta;
   clusters: Record<string, ClusterData>;
-  nodes: NodeData[];
+  nodes: NodeDataInput[];
   edges: EdgeData[];
 }
 

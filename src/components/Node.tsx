@@ -1,9 +1,9 @@
 import { useCallback, useRef } from "react";
-import type { NodeData, ClusterData } from "../lib/types";
+import type { NodeData } from "../lib/types";
 
 interface NodeProps {
   node: NodeData;
-  cluster: ClusterData;
+  clusterColor: string;
   fontSize: number;
   selected: boolean;
   dimmed: boolean;
@@ -16,7 +16,7 @@ interface NodeProps {
 
 export default function Node({
   node,
-  cluster,
+  clusterColor,
   fontSize,
   selected,
   dimmed,
@@ -122,7 +122,7 @@ export default function Node({
         cy={node.y}
         r={node.radius}
         fill="var(--color-surface)"
-        stroke={cluster.color}
+        stroke={clusterColor}
         strokeWidth={strokeWidth}
       />
       <text
