@@ -1,11 +1,11 @@
 {
   "planner": {
-    "status": "completed",
-    "current_task": "ED-0010",
-    "task_started": "2026-03-05",
-    "brief_note": "COMPLETE: ED-0010 task spec written, evaluated (arch-review-fast), handoff ready for assignment.",
-    "details_link": "delegation/tasks/2-todo/ED-0010-separate-design-data-from-graph-json.md",
-    "handoff_file": ".agent-context/ED-0010-HANDOFF-feature-developer.md"
+    "status": "idle",
+    "current_task": null,
+    "task_started": null,
+    "brief_note": "ED-0010 merged (PR #10). Two follow-up tasks in backlog: ED-0011 (rounded corners), ED-0012 (export robustness).",
+    "details_link": "delegation/tasks/5-done/ED-0010-separate-design-data-from-graph-json.md",
+    "handoff_file": null
   },
   "feature-developer-v3:ED-0001": {
     "status": "assigned",
