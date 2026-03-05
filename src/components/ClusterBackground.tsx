@@ -25,12 +25,12 @@ export default function ClusterBackground({
         y={bounds.y}
         width={bounds.width}
         height={bounds.height}
-        rx={16}
-        ry={16}
+        rx="var(--radius-lg)"
+        ry="var(--radius-lg)"
         fill={cluster.fill}
         stroke={cluster.color}
         strokeWidth={1}
-        strokeOpacity={0.2}
+        strokeOpacity="var(--opacity-cluster-stroke)"
       />
       <text
         x={bounds.x + bounds.width / 2}
@@ -38,9 +38,9 @@ export default function ClusterBackground({
         textAnchor="middle"
         fill={cluster.color}
         fontSize={fontSize}
-        fontWeight={600}
+        fontWeight="var(--type-weight-semibold)"
         fontFamily="var(--font-body)"
-        opacity={0.7}
+        opacity="var(--opacity-cluster-label)"
       >
         {cluster.label}
       </text>

@@ -23,6 +23,7 @@
 }
 
 :root {
+  /* ── Colors ──────────────────────────────────────── */
   --color-bg: #faf9f7;
   --color-text: #1a1a2e;
   --color-text-secondary: #666;
@@ -30,15 +31,59 @@
   --color-border: #e0ddd8;
   --color-surface: #ffffff;
 
+  /* ── Typography ──────────────────────────────────── */
   --font-body: "IBM Plex Sans", system-ui, sans-serif;
   --font-size-xs: 9px;
   --font-size-sm: 11px;
   --font-size-base: 14px;
   --font-size-lg: 26px;
 
+  --type-weight-medium: 500;
+  --type-weight-semibold: 600;
+  --type-line-height-tight: 1.1;
+  --type-line-height-normal: 1.2;
+  --type-line-height-relaxed: 1.4;
+  --type-line-height-loose: 1.5;
+
+  /* Fibonacci type scale base sizes (8:13:21 ratios computed at runtime) */
+  --type-node-base: 11;
+  --type-node-large-base: 14;
+  --type-edge-min: 7;
+
+  /* ── Opacity (interaction states) ────────────────── */
+  --opacity-node-dimmed: 0.15;
+  --opacity-edge-dimmed: 0.1;
+  --opacity-edge-default: 0.4;
+  --opacity-cluster-label: 0.7;
+  --opacity-cluster-stroke: 0.2;
+
+  /* ── Spacing (8px grid) ──────────────────────────── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 40px;
+  --space-3xl: 80px;
+
+  /* ── Sizing ──────────────────────────────────────── */
+  --stroke-node-default: 1.5;
+  --stroke-node-highlighted: 2;
+  --stroke-node-selected: 3;
+  --stroke-edge-default: 1;
+  --stroke-edge-highlighted: 1.5;
+  --stroke-label-halo: 3;
+
+  --size-marker-width: 8;
+  --size-marker-height: 6;
+  --size-indicator: 12px;
+
+  /* ── Radii ───────────────────────────────────────── */
   --radius-md: 10px;
   --radius-lg: 16px;
+  --radius-btn: 6px;
 
+  /* ── Transitions ─────────────────────────────────── */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.25s ease;
 }
@@ -110,22 +155,22 @@ body {
 
 .export-controls {
   position: fixed;
-  top: 16px;
-  right: 16px;
+  top: var(--space-lg);
+  right: var(--space-lg);
   display: flex;
-  gap: 8px;
+  gap: var(--space-sm);
   z-index: 10;
 }
 
 .export-btn {
-  padding: 6px 12px;
-  font-size: 11px;
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--font-size-sm);
   font-family: var(--font-body);
-  font-weight: 500;
+  font-weight: var(--type-weight-medium);
   color: var(--color-text-secondary);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: 6px;
+  border-radius: var(--radius-btn);
   cursor: pointer;
   transition: all var(--transition-fast);
 }
@@ -141,8 +186,8 @@ body {
   .export-controls {
     top: auto;
     bottom: 48px;
-    right: 16px;
+    right: var(--space-lg);
     flex-direction: column;
-    gap: 4px;
+    gap: var(--space-xs);
   }
 }

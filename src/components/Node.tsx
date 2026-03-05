@@ -91,8 +91,12 @@ export default function Node({
     [node.id, onSelect]
   );
 
-  const opacity = dimmed ? 0.15 : 1;
-  const strokeWidth = selected ? 3 : highlighted ? 2 : 1.5;
+  const opacity = dimmed ? "var(--opacity-node-dimmed)" : 1;
+  const strokeWidth = selected
+    ? "var(--stroke-node-selected)"
+    : highlighted
+      ? "var(--stroke-node-highlighted)"
+      : "var(--stroke-node-default)";
 
   const lines = node.label.split("\n");
 
@@ -127,7 +131,7 @@ export default function Node({
         textAnchor="middle"
         dominantBaseline="central"
         fontSize={fontSize}
-        fontWeight={500}
+        fontWeight="var(--type-weight-medium)"
         fontFamily="var(--font-body)"
         fill="var(--color-text)"
         style={{ pointerEvents: "none", userSelect: "none" }}

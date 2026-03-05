@@ -19,7 +19,7 @@ export default function DetailPanel({ node, cluster }: DetailPanelProps) {
         overflowY: "auto",
         background: "var(--color-surface)",
         borderTop: "1px solid var(--color-border)",
-        padding: "16px 24px",
+        padding: "var(--space-lg) var(--space-xl)",
         fontFamily: "var(--font-body)",
         zIndex: 10,
         animation: "slide-up 0.2s ease",
@@ -30,27 +30,27 @@ export default function DetailPanel({ node, cluster }: DetailPanelProps) {
           maxWidth: 800,
           margin: "0 auto",
           display: "flex",
-          gap: 16,
+          gap: "var(--space-lg)",
           alignItems: "flex-start",
         }}
       >
         <div
           style={{
-            width: 12,
-            height: 12,
+            width: "var(--size-indicator)",
+            height: "var(--size-indicator)",
             borderRadius: "50%",
             background: cluster.color,
             flexShrink: 0,
-            marginTop: 4,
+            marginTop: "var(--space-xs)",
           }}
         />
         <div style={{ minWidth: 0 }}>
           <div
             style={{
               fontSize: "clamp(12px, 1.8vw, 14px)",
-              fontWeight: 600,
+              fontWeight: "var(--type-weight-semibold)",
               color: "var(--color-text)",
-              marginBottom: 4,
+              marginBottom: "var(--space-xs)",
             }}
           >
             {node.label.replace(/\n/g, " ")}
@@ -59,7 +59,7 @@ export default function DetailPanel({ node, cluster }: DetailPanelProps) {
             style={{
               fontSize: "clamp(11px, 1.6vw, 13px)",
               color: "var(--color-text-secondary)",
-              lineHeight: 1.5,
+              lineHeight: "var(--type-line-height-loose)",
             }}
           >
             {node.description}

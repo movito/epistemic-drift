@@ -33,7 +33,11 @@ export default function Edge({
   };
   const dashArray = STROKE_DASHARRAY[edge.style || "solid"];
 
-  const opacity = dimmed ? 0.1 : highlighted ? 1 : 0.4;
+  const opacity = dimmed
+    ? "var(--opacity-edge-dimmed)"
+    : highlighted
+      ? 1
+      : "var(--opacity-edge-default)";
 
   return (
     <g
@@ -46,7 +50,7 @@ export default function Edge({
         x2={x2}
         y2={y2}
         stroke="var(--color-text)"
-        strokeWidth={highlighted ? 1.5 : 1}
+        strokeWidth={highlighted ? "var(--stroke-edge-highlighted)" : "var(--stroke-edge-default)"}
         strokeDasharray={dashArray}
         markerEnd="url(#arrowhead)"
       />
@@ -60,7 +64,7 @@ export default function Edge({
           fill="var(--color-text)"
           fontFamily="var(--font-body)"
           stroke="var(--color-bg)"
-          strokeWidth={3}
+          strokeWidth="var(--stroke-label-halo)"
           paintOrder="stroke"
           style={{ pointerEvents: "none" }}
         >

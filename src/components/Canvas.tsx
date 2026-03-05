@@ -183,6 +183,8 @@ export default function Canvas({
       onClick={handleClick}
     >
       <defs>
+        {/* Marker dims mirror --size-marker-width/height tokens.
+            SVG marker attributes don't support CSS vars. */}
         <marker
           id="arrowhead"
           markerWidth="8"

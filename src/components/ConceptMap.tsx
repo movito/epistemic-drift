@@ -61,12 +61,13 @@ export default function ConceptMap() {
     const el = measureRef.current;
     if (!el) return;
 
+    // Mirror CSS tokens: --space-sm, --type-node-base, --type-node-large-base, --type-edge-min
     const PADDING = 8;
     const BASE_FONT = 11;
     const LARGE_BASE_FONT = 14;
     const MIN_EDGE_FONT = 7;
 
-    el.style.fontWeight = "500";
+    el.style.fontWeight = "var(--type-weight-medium)";
     el.style.fontFamily = "var(--font-body)";
 
     let minRegularScale = 1;
@@ -287,8 +288,8 @@ export default function ConceptMap() {
       <div
         style={{
           position: "fixed",
-          top: 16,
-          left: 24,
+          top: "var(--space-lg)",
+          left: "var(--space-xl)",
           zIndex: 10,
           fontFamily: "var(--font-body)",
         }}
@@ -296,7 +297,7 @@ export default function ConceptMap() {
         <h1
           style={{
             fontSize: "clamp(14px, 2.5vw, 20px)",
-            fontWeight: 600,
+            fontWeight: "var(--type-weight-semibold)",
             color: "var(--color-text)",
             margin: 0,
           }}
@@ -307,9 +308,9 @@ export default function ConceptMap() {
           style={{
             fontSize: "clamp(10px, 1.5vw, 12px)",
             color: "var(--color-text-muted)",
-            marginTop: 4,
+            marginTop: "var(--space-xs)",
             maxWidth: "min(500px, 50vw)",
-            lineHeight: 1.4,
+            lineHeight: "var(--type-line-height-relaxed)",
           }}
         >
           {data.meta.subtitle}
@@ -394,9 +395,9 @@ export default function ConceptMap() {
       <div
         style={{
           position: "fixed",
-          bottom: selectedNode ? 80 : 16,
-          right: 16,
-          fontSize: 10,
+          bottom: selectedNode ? "var(--space-3xl)" : "var(--space-lg)",
+          right: "var(--space-lg)",
+          fontSize: "var(--font-size-xs)",
           color: "var(--color-text-muted)",
           fontFamily: "var(--font-body)",
           transition: "bottom var(--transition-normal)",
