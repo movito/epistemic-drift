@@ -5,14 +5,17 @@ interface ClusterBackgroundProps {
   clusterKey: string;
   cluster: ClusterData;
   nodes: NodeData[];
+  fontSize: number;
 }
 
 export default function ClusterBackground({
   clusterKey,
   cluster,
   nodes,
+  fontSize,
 }: ClusterBackgroundProps) {
-  const bounds = getClusterBounds(clusterKey, nodes);
+  const labelHeight = cluster.label ? fontSize + 8 : 0;
+  const bounds = getClusterBounds(clusterKey, nodes, 40, labelHeight);
   if (!bounds || !cluster.label) return null;
 
   return (
@@ -31,10 +34,10 @@ export default function ClusterBackground({
       />
       <text
         x={bounds.x + bounds.width / 2}
-        y={bounds.y + 32}
+        y={bounds.y + fontSize + 12}
         textAnchor="middle"
         fill={cluster.color}
-        fontSize={11}
+        fontSize={fontSize}
         fontWeight={600}
         fontFamily="var(--font-body)"
         opacity={0.7}

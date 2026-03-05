@@ -4,6 +4,7 @@ import type { NodeData, ClusterData } from "../lib/types";
 interface NodeProps {
   node: NodeData;
   cluster: ClusterData;
+  fontSize: number;
   selected: boolean;
   dimmed: boolean;
   highlighted: boolean;
@@ -16,6 +17,7 @@ interface NodeProps {
 export default function Node({
   node,
   cluster,
+  fontSize,
   selected,
   dimmed,
   highlighted,
@@ -124,7 +126,7 @@ export default function Node({
         y={node.y}
         textAnchor="middle"
         dominantBaseline="central"
-        fontSize={node.radius > 40 ? 14 : 11}
+        fontSize={fontSize}
         fontWeight={500}
         fontFamily="var(--font-body)"
         fill="var(--color-text)"

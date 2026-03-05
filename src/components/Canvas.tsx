@@ -191,7 +191,7 @@ export default function Canvas({
           refY="3"
           orient="auto"
         >
-          <path d="M 0 0 L 8 3 L 0 6 Z" fill="var(--color-text)" opacity={0.4} />
+          <path d="M 0 0 L 8 3 L 0 6 Z" fill="var(--color-text)" />
         </marker>
       </defs>
       <g

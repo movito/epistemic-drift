@@ -28,15 +28,17 @@ export function getEdgePath(
 }
 
 /**
- * Calculate the midpoint of an edge for label positioning.
+ * Calculate a point along an edge for label positioning.
+ * t=0.5 gives the midpoint; values closer to 0 or 1 shift toward from/to.
  */
-export function getEdgeMidpoint(
+export function getEdgeLabelPoint(
   from: NodeData,
-  to: NodeData
+  to: NodeData,
+  t = 0.5
 ): { x: number; y: number } {
   return {
-    x: (from.x + to.x) / 2,
-    y: (from.y + to.y) / 2,
+    x: from.x + (to.x - from.x) * t,
+    y: from.y + (to.y - from.y) * t,
   };
 }
 
@@ -47,7 +49,8 @@ export function getEdgeMidpoint(
 export function getClusterBounds(
   clusterKey: string,
   nodes: NodeData[],
-  padding = 40
+  padding = 40,
+  labelHeight = 0
 ): { x: number; y: number; width: number; height: number } | null {
   const members = nodes.filter((n) => n.cluster === clusterKey);
   if (members.length === 0) return null;
@@ -64,10 +67,13 @@ export function getClusterBounds(
     maxY = Math.max(maxY, node.y + node.radius);
   }
 
+  // Extra top space for the cluster label
+  const topPadding = padding + labelHeight;
+
   return {
     x: minX - padding,
-    y: minY - padding,
+    y: minY - topPadding,
     width: maxX - minX + padding * 2,
-    height: maxY - minY + padding * 2,
+    height: maxY - minY + padding + topPadding,
   };
 }

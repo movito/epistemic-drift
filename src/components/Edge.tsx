@@ -1,10 +1,12 @@
 import type { NodeData, EdgeData } from "../lib/types";
-import { getEdgePath, getEdgeMidpoint } from "../lib/geometry";
+import { getEdgePath } from "../lib/geometry";
 
 interface EdgeProps {
   edge: EdgeData;
   fromNode: NodeData;
   toNode: NodeData;
+  labelPos?: { x: number; y: number };
+  fontSize: number;
   dimmed: boolean;
   highlighted: boolean;
 }
@@ -19,17 +21,25 @@ export default function Edge({
   edge,
   fromNode,
   toNode,
+  labelPos,
+  fontSize,
   dimmed,
   highlighted,
 }: EdgeProps) {
   const { x1, y1, x2, y2 } = getEdgePath(fromNode, toNode);
-  const mid = getEdgeMidpoint(fromNode, toNode);
+  const mid = labelPos ?? {
+    x: (fromNode.x + toNode.x) / 2,
+    y: (fromNode.y + toNode.y) / 2,
+  };
   const dashArray = STROKE_DASHARRAY[edge.style || "solid"];
 
   const opacity = dimmed ? 0.1 : highlighted ? 1 : 0.4;
 
   return (
-    <g style={{ transition: "opacity var(--transition-fast)" }}>
+    <g
+      opacity={opacity}
+      style={{ transition: "opacity var(--transition-fast)" }}
+    >
       <line
         x1={x1}
         y1={y1}
@@ -38,7 +48,6 @@ export default function Edge({
         stroke="var(--color-text)"
         strokeWidth={highlighted ? 1.5 : 1}
         strokeDasharray={dashArray}
-        opacity={opacity}
         markerEnd="url(#arrowhead)"
       />
       {edge.label && (
@@ -47,10 +56,12 @@ export default function Edge({
           y={mid.y}
           textAnchor="middle"
           dominantBaseline="central"
-          fontSize={9}
-          fill="var(--color-text-secondary)"
+          fontSize={fontSize}
+          fill="var(--color-text)"
           fontFamily="var(--font-body)"
-          opacity={dimmed ? 0.1 : 0.8}
+          stroke="var(--color-bg)"
+          strokeWidth={3}
+          paintOrder="stroke"
           style={{ pointerEvents: "none" }}
         >
           {edge.label.split("\n").map((line, i, arr) => (
