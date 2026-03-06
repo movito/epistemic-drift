@@ -1,6 +1,6 @@
 # ED-0001: Download IBM Plex Sans Fonts
 
-**Status**: Todo
+**Status**: Done
 **Priority**: high
 **Assigned To**: feature-developer
 **Estimated Effort**: 30 minutes

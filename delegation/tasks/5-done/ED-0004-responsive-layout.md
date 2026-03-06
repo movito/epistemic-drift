@@ -1,6 +1,6 @@
 # ED-0004: Responsive Layout
 
-**Status**: Todo
+**Status**: Done
 **Priority**: medium
 **Assigned To**: feature-developer
 **Estimated Effort**: 1 hour

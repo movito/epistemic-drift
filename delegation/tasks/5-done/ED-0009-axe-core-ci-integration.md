@@ -1,6 +1,6 @@
 # ED-0009: Add axe-core Accessibility Testing to CI
 
-**Status**: In Progress
+**Status**: Done
 **Priority**: medium
 **Assigned To**: feature-developer-v3
 **Estimated Effort**: 2-3 hours

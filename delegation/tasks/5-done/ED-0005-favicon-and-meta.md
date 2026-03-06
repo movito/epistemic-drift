@@ -1,6 +1,6 @@
 # ED-0005: Favicon and Open Graph Meta
 
-**Status**: Todo
+**Status**: Done
 **Priority**: low
 **Assigned To**: feature-developer
 **Estimated Effort**: 30 minutes

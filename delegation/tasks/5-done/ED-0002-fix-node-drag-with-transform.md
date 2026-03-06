@@ -1,6 +1,6 @@
 # ED-0002: Fix Node Drag with Pan/Zoom Transform
 
-**Status**: Todo
+**Status**: Done
 **Priority**: high
 **Assigned To**: feature-developer
 **Estimated Effort**: 1 hour
