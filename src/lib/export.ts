@@ -77,7 +77,7 @@ export function exportPNG(svgElement: SVGSVGElement): Promise<void> {
       a.href = url;
       a.download = "epistemic-map.png";
       a.click();
-      URL.revokeObjectURL(url);
+      setTimeout(() => URL.revokeObjectURL(url), 100);
     } finally {
       document.body.removeChild(clone);
     }
