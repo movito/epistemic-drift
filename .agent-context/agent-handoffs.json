@@ -1,11 +1,11 @@
 {
   "planner": {
-    "status": "completed",
-    "current_task": "ED-0011, ED-0012",
-    "task_started": "2026-03-05",
-    "brief_note": "COMPLETE: ED-0011 and ED-0012 evaluated, revised, promoted to todo, handoffs and task starters ready.",
-    "details_link": "delegation/tasks/2-todo/",
-    "handoff_file": ".agent-context/ED-0011-HANDOFF-feature-developer.md, .agent-context/ED-0012-HANDOFF-feature-developer.md"
+    "status": "idle",
+    "current_task": null,
+    "task_started": null,
+    "brief_note": "ED-0010, ED-0011, ED-0012 all merged. Offscreen clone pattern added to patterns.yml from ED-0012 retro.",
+    "details_link": null,
+    "handoff_file": null
   },
   "feature-developer-v3:ED-0001": {
     "status": "assigned",

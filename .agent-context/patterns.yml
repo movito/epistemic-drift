@@ -452,6 +452,32 @@ frontend:
       }
     caught_by: "CodeRabbit (ED-0003)"
 
+  offscreen_clone_for_dom_capture:
+    rule: >
+      When using a DOM capture library (html-to-image, dom-to-image-more,
+      modern-screenshot) to export/screenshot a live component, clone the
+      target element offscreen BEFORE passing it to the library. These
+      libraries read from the live DOM during async operations — if React
+      re-renders while the capture is in progress, the output may be
+      corrupted or cause race conditions. Clone the element, position it
+      offscreen (position: absolute; left: -9999px), append to body,
+      capture from the clone, then remove it.
+    pattern: |
+      # Bad: library reads from live DOM, React may re-render mid-capture
+      const dataUrl = await toPng(liveElement);
+
+      # Good: clone offscreen, capture from clone
+      const clone = liveElement.cloneNode(true) as HTMLElement;
+      clone.style.position = "absolute";
+      clone.style.left = "-9999px";
+      document.body.appendChild(clone);
+      try {
+        const dataUrl = await toPng(clone);
+      } finally {
+        document.body.removeChild(clone);
+      }
+    caught_by: "BugBot (ED-0012)"
+
   svg_coordinate_conversion:
     rule: >
       When handling pointer events on SVG elements inside a transformed

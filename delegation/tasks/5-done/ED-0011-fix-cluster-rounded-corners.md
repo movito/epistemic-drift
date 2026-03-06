@@ -1,6 +1,6 @@
 # ED-0011: Fix Cluster Background Rounded Corners
 
-**Status**: In Progress
+**Status**: Done
 **Priority**: low
 **Assigned To**: feature-developer-v3
 **Estimated Effort**: 30 min
