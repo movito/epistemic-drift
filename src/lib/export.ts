@@ -44,12 +44,15 @@ export function exportSVG(svgElement: SVGSVGElement): Promise<void> {
         height: 760,
       });
 
+      const blob = await (await fetch(dataUrl)).blob();
+      const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = dataUrl;
+      a.href = url;
       a.download = "epistemic-map.svg";
       a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 100);
     } finally {
-      document.body.removeChild(clone);
+      clone.remove();
     }
   });
 }
@@ -79,7 +82,7 @@ export function exportPNG(svgElement: SVGSVGElement): Promise<void> {
       a.click();
       setTimeout(() => URL.revokeObjectURL(url), 100);
     } finally {
-      document.body.removeChild(clone);
+      clone.remove();
     }
   });
 }
