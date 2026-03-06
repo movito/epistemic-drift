@@ -305,11 +305,11 @@ export default function ConceptMap() {
   }, []);
 
   const handleExportSVG = useCallback(() => {
-    if (svgRef.current) exportSVG(svgRef.current);
+    if (svgRef.current) exportSVG(svgRef.current).catch(console.error);
   }, []);
 
   const handleExportPNG = useCallback(() => {
-    if (svgRef.current) exportPNG(svgRef.current);
+    if (svgRef.current) exportPNG(svgRef.current).catch(console.error);
   }, []);
 
   const handleDumpPositions = useCallback(() => {
@@ -326,10 +326,10 @@ export default function ConceptMap() {
           dumpPositions(nodes);
           break;
         case "s":
-          if (svgRef.current) exportSVG(svgRef.current);
+          if (svgRef.current) exportSVG(svgRef.current).catch(console.error);
           break;
         case "p":
-          if (svgRef.current) exportPNG(svgRef.current);
+          if (svgRef.current) exportPNG(svgRef.current).catch(console.error);
           break;
         case "escape":
           setSelectedId(null);

@@ -1,80 +1,56 @@
+import { toSvg, toBlob } from "html-to-image";
 import type { NodeData } from "./types";
 
 /**
  * Export the SVG element as a downloadable .svg file.
- * Strips pan/zoom transform and sets explicit dimensions.
+ * Uses html-to-image to resolve CSS custom properties and embed fonts.
  */
-export function exportSVG(svgElement: SVGSVGElement): void {
-  const clone = svgElement.cloneNode(true) as SVGSVGElement;
+export async function exportSVG(svgElement: SVGSVGElement): Promise<void> {
+  const outerG = svgElement.querySelector("g[data-canvas]");
+  const originalTransform = outerG?.getAttribute("transform") || "";
+  if (outerG) outerG.removeAttribute("transform");
 
-  // Remove pan/zoom transform from outer <g>
-  const outerG = clone.querySelector("g[data-canvas]");
-  if (outerG) {
-    outerG.removeAttribute("transform");
+  try {
+    const dataUrl = await toSvg(svgElement as unknown as HTMLElement, {
+      width: 1020,
+      height: 760,
+    });
+
+    const a = document.createElement("a");
+    a.href = dataUrl;
+    a.download = "epistemic-map.svg";
+    a.click();
+  } finally {
+    if (outerG) outerG.setAttribute("transform", originalTransform);
   }
-
-  // Set explicit dimensions
-  clone.setAttribute("width", "1020");
-  clone.setAttribute("height", "760");
-
-  const serializer = new XMLSerializer();
-  const svgString = serializer.serializeToString(clone);
-  const blob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "epistemic-map.svg";
-  a.click();
-  URL.revokeObjectURL(url);
 }
 
 /**
  * Export the SVG element as a downloadable .png file at 2x resolution.
+ * Uses html-to-image to resolve CSS custom properties and embed fonts.
  */
-export function exportPNG(svgElement: SVGSVGElement): void {
-  const clone = svgElement.cloneNode(true) as SVGSVGElement;
+export async function exportPNG(svgElement: SVGSVGElement): Promise<void> {
+  const outerG = svgElement.querySelector("g[data-canvas]");
+  const originalTransform = outerG?.getAttribute("transform") || "";
+  if (outerG) outerG.removeAttribute("transform");
 
-  const outerG = clone.querySelector("g[data-canvas]");
-  if (outerG) {
-    outerG.removeAttribute("transform");
-  }
-
-  const width = 1020;
-  const height = 760;
-  const scale = 2;
-
-  clone.setAttribute("width", String(width));
-  clone.setAttribute("height", String(height));
-
-  const serializer = new XMLSerializer();
-  const svgString = serializer.serializeToString(clone);
-  const blob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-
-  const img = new Image();
-  img.onload = () => {
-    const canvas = document.createElement("canvas");
-    canvas.width = width * scale;
-    canvas.height = height * scale;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    ctx.scale(scale, scale);
-    ctx.drawImage(img, 0, 0);
-    URL.revokeObjectURL(url);
-
-    canvas.toBlob((pngBlob) => {
-      if (!pngBlob) return;
-      const pngUrl = URL.createObjectURL(pngBlob);
-      const a = document.createElement("a");
-      a.href = pngUrl;
-      a.download = "epistemic-map.png";
-      a.click();
-      URL.revokeObjectURL(pngUrl);
+  try {
+    const blob = await toBlob(svgElement as unknown as HTMLElement, {
+      width: 1020,
+      height: 760,
+      pixelRatio: 2,
     });
-  };
-  img.src = url;
+
+    if (!blob) return;
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "epistemic-map.png";
+    a.click();
+    URL.revokeObjectURL(url);
+  } finally {
+    if (outerG) outerG.setAttribute("transform", originalTransform);
+  }
 }
 
 /**
