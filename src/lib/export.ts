@@ -1,7 +1,7 @@
 import { toSvg, toBlob } from "html-to-image";
 import type { NodeData } from "./types";
 
-/** Serialize exports so concurrent calls don't race on transform state. */
+/** Serialize exports so concurrent calls don't race. */
 let exportQueue: Promise<void> = Promise.resolve();
 
 function runSerially(task: () => Promise<void>): Promise<void> {
@@ -11,17 +11,35 @@ function runSerially(task: () => Promise<void>): Promise<void> {
 }
 
 /**
+ * Clone the SVG offscreen with pan/zoom reset.
+ * The clone stays in the DOM so CSS custom properties resolve via
+ * getComputedStyle, but is invisible to the user.
+ */
+function cloneOffscreen(svgElement: SVGSVGElement): SVGSVGElement {
+  const clone = svgElement.cloneNode(true) as SVGSVGElement;
+  clone.style.position = "absolute";
+  clone.style.left = "-9999px";
+  clone.style.top = "-9999px";
+  clone.style.width = "1020px";
+  clone.style.height = "760px";
+  document.body.appendChild(clone);
+
+  const outerG = clone.querySelector("g[data-canvas]");
+  if (outerG) outerG.removeAttribute("transform");
+
+  return clone;
+}
+
+/**
  * Export the SVG element as a downloadable .svg file.
  * Uses html-to-image to resolve CSS custom properties and embed fonts.
  */
 export function exportSVG(svgElement: SVGSVGElement): Promise<void> {
   return runSerially(async () => {
-    const outerG = svgElement.querySelector("g[data-canvas]");
-    const originalTransform = outerG?.getAttribute("transform") ?? null;
-    if (outerG) outerG.removeAttribute("transform");
+    const clone = cloneOffscreen(svgElement);
 
     try {
-      const dataUrl = await toSvg(svgElement as unknown as HTMLElement, {
+      const dataUrl = await toSvg(clone as unknown as HTMLElement, {
         width: 1020,
         height: 760,
       });
@@ -31,13 +49,7 @@ export function exportSVG(svgElement: SVGSVGElement): Promise<void> {
       a.download = "epistemic-map.svg";
       a.click();
     } finally {
-      if (outerG) {
-        if (originalTransform != null) {
-          outerG.setAttribute("transform", originalTransform);
-        } else {
-          outerG.removeAttribute("transform");
-        }
-      }
+      document.body.removeChild(clone);
     }
   });
 }
@@ -48,12 +60,10 @@ export function exportSVG(svgElement: SVGSVGElement): Promise<void> {
  */
 export function exportPNG(svgElement: SVGSVGElement): Promise<void> {
   return runSerially(async () => {
-    const outerG = svgElement.querySelector("g[data-canvas]");
-    const originalTransform = outerG?.getAttribute("transform") ?? null;
-    if (outerG) outerG.removeAttribute("transform");
+    const clone = cloneOffscreen(svgElement);
 
     try {
-      const blob = await toBlob(svgElement as unknown as HTMLElement, {
+      const blob = await toBlob(clone as unknown as HTMLElement, {
         width: 1020,
         height: 760,
         pixelRatio: 2,
@@ -69,13 +79,7 @@ export function exportPNG(svgElement: SVGSVGElement): Promise<void> {
       a.click();
       URL.revokeObjectURL(url);
     } finally {
-      if (outerG) {
-        if (originalTransform != null) {
-          outerG.setAttribute("transform", originalTransform);
-        } else {
-          outerG.removeAttribute("transform");
-        }
-      }
+      document.body.removeChild(clone);
     }
   });
 }
