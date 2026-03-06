@@ -29,12 +29,11 @@ export default function ClusterBackground({
         y={bounds.y}
         width={bounds.width}
         height={bounds.height}
-        rx="var(--radius-lg)"
-        ry="var(--radius-lg)"
         fill={clusterFill}
         stroke={clusterColor}
         strokeWidth={1}
         strokeOpacity="var(--opacity-cluster-stroke)"
+        style={{ rx: 'var(--radius-lg)', ry: 'var(--radius-lg)' }}
       />
       <text
         x={bounds.x + bounds.width / 2}
